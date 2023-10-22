@@ -12,28 +12,30 @@ class AuthController extends Controller
     {
         $this->auth_service = $auth_service;
     }
-    // public function showForm()
-    // {
-    //   return view('user.auth.register');
-    // }
+    public function registerForm()
+    {
+      return view('auth.register');
+    }
     public function register(RegisterRequest $request)
     {
         $this->auth_service->register($request);
         return redirect()->route('login');
     }
-    // public function loginForm()
-    // {
-    //     return view('user.auth.login');
-    // }
+    public function loginForm()
+    {
+        return view('auth.login');
+    }
     public function login(Request $request)
     {
-        $this->auth_service->login($request);
-        return('login');
-        return redirect()->route('home');
+        if ($this->auth_service->login($request)) {
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('login')->with('error', 'Login failed. Please try again.');
+        }
     }
     public function logout()
     {
         $this->auth_service->logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }

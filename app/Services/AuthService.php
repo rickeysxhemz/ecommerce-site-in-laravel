@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Helper\Helper;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService{
     public function register($request)
@@ -34,7 +35,7 @@ class AuthService{
     {
         try{
         $credentials = $request->only('email', 'password');
-        if (auth()->attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             return true;
         }
         return false;

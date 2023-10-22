@@ -14,9 +14,9 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('index');
+})->name('home');
 
 Route::prefix('user')->group(function () {
     //------------ AUTH ------------
