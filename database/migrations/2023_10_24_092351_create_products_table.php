@@ -40,6 +40,7 @@ class CreateProductsTable extends Migration
             $table->integer('isAdultProduct')->nullable();
             $table->integer('lastSoldUpdate')->nullable();
             $table->integer('monthlySold')->nullable();
+            $table->integer('selling_count')->nullable();
             $table->integer('lastUpdate')->nullable();
             $table->integer('lastPriceChange')->nullable();
             $table->integer('salesRankReference')->nullable();
