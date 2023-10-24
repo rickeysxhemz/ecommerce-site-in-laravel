@@ -65,6 +65,29 @@
         </div>
       </section>
     </main>
- @include('includes.footer')   
+ @include('includes.footer')
+ <script>
+    toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "rtl": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "500",
+            "hideDuration": "500",
+            "timeOut": "2000",
+            "extendedTimeOut": "500",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+        };
+        @if(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+    </script>  
   </body>
 </html>

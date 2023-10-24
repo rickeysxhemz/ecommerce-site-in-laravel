@@ -11,5 +11,6 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="{{ asset('assets/css/style.css?v=3.0.0') }}" rel="stylesheet">
-    <title>Ecom - Ecom Marketplace Template</title>
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
   </head>
