@@ -24,11 +24,11 @@ class AuthService{
             $user_role->users()->attach($user->id);
         DB::commit();
         return true;
-        }catch(\Exception $e){
+    }catch(\Exception $e){
             DB::rollBack();
             $error = "Error: Message: " . $e->getMessage() . " File: " . $e->getFile() . " Line #: " . $e->getLine();
             Helper::errorLogs("AuthService->register()", $error);
-            return redirect()->back()->with('error', 'Something went wrong!');
+            return false;
         }
     }
     public function login($request)
