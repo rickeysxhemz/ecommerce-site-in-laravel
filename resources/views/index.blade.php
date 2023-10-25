@@ -20,7 +20,7 @@
                               <p class="font-sm color-brand-3">Curabitur id lectus in felis hendrerit efficitur quis quis lectus. Donec sollicitudin elit eu ipsum maximus blandit. Curabitur blandit tempus consectetur.</p>
                             </div>
                           </div>
-                          <div class="mt-30"><a class="btn btn-brand-2" href="shop-grid.html">Shop now</a><a class="btn btn-link" href="shop-grid.html">Learn more</a></div>
+                          <div class="mt-30"><a class="btn btn-brand-2" href="{{route('shop')}}">Shop now</a><a class="btn btn-link" href="{{route('shop')}}">Learn more</a></div>
                         </div>
                       </div>
                       <div class="swiper-slide">
@@ -32,7 +32,7 @@
                               <p class="font-sm color-brand-3">Curabitur id lectus in felis hendrerit efficitur quis quis lectus. Donec sollicitudin elit eu ipsum maximus blandit. Curabitur blandit tempus consectetur.</p>
                             </div>
                           </div>
-                          <div class="mt-30"><a class="btn btn-brand-2" href="shop-grid.html">Shop now</a><a class="btn btn-link" href="shop-grid.html">Learn more</a></div>
+                          <div class="mt-30"><a class="btn btn-brand-2" href="{{route('shop')}}">Shop now</a><a class="btn btn-link" href="{{route('shop')}}">Learn more</a></div>
                         </div>
                       </div>
                       <div class="swiper-slide">
@@ -44,7 +44,7 @@
                               <p class="font-sm color-brand-3">Curabitur id lectus in felis hendrerit efficitur quis quis lectus. Donec sollicitudin elit eu ipsum maximus blandit. Curabitur blandit tempus consectetur.</p>
                             </div>
                           </div>
-                          <div class="mt-30"><a class="btn btn-brand-2" href="shop-grid.html">Shop now</a><a class="btn btn-link" href="shop-grid.html">Learn more</a></div>
+                          <div class="mt-30"><a class="btn btn-brand-2" href="{{route('shop')}}">Shop now</a><a class="btn btn-link" href="{{route('shop')}}">Learn more</a></div>
                         </div>
                       </div>
                     </div>
@@ -58,14 +58,14 @@
                     <div class="banner-small banner-small-1 bg-13"><span class="color-danger text-uppercase font-sm-lh32">10%<span class="color-brand-3">Sale Off</span></span>
                       <h4 class="mb-10">Apple Watch Serial 7</h4>
                       <p class="color-brand-3 font-desc">Don&apos;t miss the last<br class="d-none d-lg-block"> opportunity.</p>
-                      <div class="mt-20"><a class="btn btn-brand-3 btn-arrow-right" href="shop-grid.html">Shop now</a></div>
+                      <div class="mt-20"><a class="btn btn-brand-3 btn-arrow-right" href="{{route('shop')}}">Shop now</a></div>
                     </div>
                   </div>
                   <div class="col-lg-12 col-md-6 col-sm-12">
                     <div class="banner-small banner-small-2 bg-14"><span class="color-danger text-uppercase font-sm-lh32">LATEST COLLECTION</span>
                       <h4 class="mb-10">Apple Devices &amp; Software</h4>
                       <p class="color-brand-3 font-md">Don&apos;t miss the last<br class="d-none d-lg-block"> opportunity.</p>
-                      <div class="mt-20"><a class="btn btn-brand-2 btn-arrow-right" href="shop-grid.html">Shop now</a></div>
+                      <div class="mt-20"><a class="btn btn-brand-2 btn-arrow-right" href="{{route('shop')}}">Shop now</a></div>
                     </div>
                   </div>
                 </div>
@@ -86,13 +86,13 @@
                 <div class="box-swiper">
                   <div class="swiper-container swiper-group-7">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide"><a href="shop-grid.html"><img src="assets/imgs/slider/logo/acer.svg" alt="Ecom"></a></div>
-                      <div class="swiper-slide"><a href="shop-grid.html"><img src="assets/imgs/slider/logo/nokia.svg" alt="Ecom"></a></div>
-                      <div class="swiper-slide"><a href="shop-grid.html"><img src="assets/imgs/slider/logo/assus.svg" alt="Ecom"></a></div>
-                      <div class="swiper-slide"><a href="shop-grid.html"><img src="assets/imgs/slider/logo/casio.svg" alt="Ecom"></a></div>
-                      <div class="swiper-slide"><a href="shop-grid.html"><img src="assets/imgs/slider/logo/dell.svg" alt="Ecom"></a></div>
-                      <div class="swiper-slide"><a href="shop-grid.html"><img src="assets/imgs/slider/logo/panasonic.svg" alt="Ecom"></a></div>
-                      <div class="swiper-slide"><a href="shop-grid.html"><img src="assets/imgs/slider/logo/vaio.svg" alt="Ecom"></a></div>
+                      <div class="swiper-slide"><a href="{{route('shop')}}"><img src="assets/imgs/slider/logo/acer.svg" alt="Ecom"></a></div>
+                      <div class="swiper-slide"><a href="{{route('shop')}}"><img src="assets/imgs/slider/logo/nokia.svg" alt="Ecom"></a></div>
+                      <div class="swiper-slide"><a href="{{route('shop')}}"><img src="assets/imgs/slider/logo/assus.svg" alt="Ecom"></a></div>
+                      <div class="swiper-slide"><a href="{{route('shop')}}"><img src="assets/imgs/slider/logo/casio.svg" alt="Ecom"></a></div>
+                      <div class="swiper-slide"><a href="{{route('shop')}}"><img src="assets/imgs/slider/logo/dell.svg" alt="Ecom"></a></div>
+                      <div class="swiper-slide"><a href="{{route('shop')}}"><img src="assets/imgs/slider/logo/panasonic.svg" alt="Ecom"></a></div>
+                      <div class="swiper-slide"><a href="{{route('shop')}}"><img src="assets/imgs/slider/logo/vaio.svg" alt="Ecom"></a></div>
                     </div>
                   </div>
                 </div>
@@ -101,118 +101,21 @@
           </div>
           <div class="mt-50">
             <div class="row">
+              @foreach ($featured_categories as $category)
               <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/smartphone.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Smart Phone</h6></a>
+                  <div class="image-box"><a href="{{route('shop')}}"><img src="http://127.0.0.1:8000/{{$category->image}}" alt="Ecom"></a></div>
+                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="{{route('shop')}}">
+                      <h6>{{$category->name}}</h6></a>
+
                     <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">Phone Accessories</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Phone Cases</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Postpaid Phones</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Refurbished Phones</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
+                      @foreach($category->FeaturedCategory as $featured_category)
+                      <li><a class="font-sm" href="{{route('shop')}}">{{$featured_category->name}}</a></li>
+                      @endforeach
                   </div>
                 </div>
               </div>
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/television.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Television</h6></a>
-                    <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">HD DVD Players</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Projection Screens</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Television Accessories</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">TV-DVD Combos</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/computer.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Computers</h6></a>
-                    <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">Computer Components</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Computer Accessories</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Desktops</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Monitors</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/electric.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Electronics</h6></a>
-                    <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">Office Electronics</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Portable Audio &amp; Video</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Washing Machine</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Accessories &amp; Supplies</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/laptop.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Laptop &amp; Tablet</h6></a>
-                    <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">Office laptop</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Gaming laptop</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Laptop accessories</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Tablet</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/smartwatches.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Smartwatches</h6></a>
-                    <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">Sport Watches</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Chronograph Watches</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Kids Watches</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Luxury Watches</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/gaming.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Gaming</h6></a>
-                    <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">Game Controllers</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Gaming Keyboards</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">PC Gaming Mice</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">PC Game Headsets</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="shop-grid.html"><img src="assets/imgs/page/homepage1/outdoor.png" alt="Ecom"></a></div>
-                  <div class="info-right"><a class="color-brand-3 font-sm-bold" href="shop-grid.html">
-                      <h6>Outdoor Camera</h6></a>
-                    <ul class="list-links-disc">
-                      <li><a class="font-sm" href="shop-grid.html">Security &amp; Surveillance</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Surveillance DVR Kits</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Surveillance NVR Kits</a></li>
-                      <li><a class="font-sm" href="shop-grid.html">Smart Outdoor Lighting</a></li>
-                    </ul><a class="btn btn-gray-abs" href="shop-grid.html">View all</a>
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
@@ -223,19 +126,19 @@
             <div class="col-xl-3 col-lg-5 col-md-5 col-sm-12 mb-30">
               <div class="bg-5 block-iphone"><span class="color-brand-3 font-sm-lh32">Starting from $899</span>
                 <h3 class="font-xl mb-10">iPhone 12 Pro 128Gb</h3>
-                <p class="font-base color-brand-3 mb-10">Special Sale</p><a class="btn btn-arrow" href="shop-grid.html">learn more</a>
+                <p class="font-base color-brand-3 mb-10">Special Sale</p><a class="btn btn-arrow" href="{{route('shop')}}">learn more</a>
               </div>
             </div>
             <div class="col-xl-4 col-lg-7 col-md-7 col-sm-12 mb-30">
               <div class="bg-4 block-samsung"><span class="color-brand-3 font-sm-lh32">New Arrivals</span>
                 <h3 class="font-xl mb-10">Samsung 2022 Led TV</h3>
-                <p class="font-base color-brand-3 mb-20">Special Sale</p><a class="btn btn-brand-2 btn-arrow-right" href="shop-grid.html">learn more</a>
+                <p class="font-base color-brand-3 mb-20">Special Sale</p><a class="btn btn-brand-2 btn-arrow-right" href="{{route('shop')}}">learn more</a>
               </div>
             </div>
             <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12">
               <div class="bg-6 block-drone">
                 <h3 class="font-33 mb-20">Drone Quadcopter UAV - DJI Air 2S</h3>
-                <div class="mb-30"><strong class="font-18">Gimbal Camera, 5.4K Video</strong></div><a class="btn btn-brand-2 btn-arrow-right" href="shop-grid.html">learn more</a>
+                <div class="mb-30"><strong class="font-18">Gimbal Camera, 5.4K Video</strong></div><a class="btn btn-brand-2 btn-arrow-right" href="{{route('shop')}}">learn more</a>
               </div>
             </div>
           </div>

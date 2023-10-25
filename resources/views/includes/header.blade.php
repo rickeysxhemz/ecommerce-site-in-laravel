@@ -75,57 +75,16 @@
             <div class="header-nav">
               <nav class="nav-main-menu d-none d-xl-block">
                 <ul class="main-menu">
-                <li><a href="{{route('home')}}">Home</a></li>  
-                <!-- <li class="has-children"><a class="active" href="index.html">Home</a>
-                    <ul class="sub-menu two-col">
-                      <li><a href="index.html">Homepage - 1</a></li>
-                      <li><a href="index-2.html">Homepage - 2</a></li>
-                      <li><a href="index-3.html">Homepage - 3</a></li>
-                      <li><a href="index-4.html">Homepage - 4</a></li>
-                      <li><a href="index-5.html">Homepage - 5</a></li>
-                      <li><a href="index-6.html">Homepage - 6</a></li>
-                      <li><a href="index-7.html">Homepage - 7</a></li>
-                      <li><a href="index-8.html">Homepage - 8</a></li>
-                      <li><a href="index-9.html">Homepage - 9</a></li>
-                      <li><a href="index-10.html">Homepage - 10</a></li>
-                    </ul>
-                  </li> -->
+                  <li><a href="{{route('home')}}">Home</a></li>  
+              
                   <li><a href="{{route('about')}}">About</a></li>
                   <li><a href="{{route('shop')}}">Shop</a></li>
-                  <!-- <li class="has-children"><a href="shop-grid.html">Shop</a>
-                    <ul class="sub-menu two-col">
-                      <li><a href="shop-grid.html">Shop Grid</a></li>
-                      <li><a href="shop-grid-2.html">Shop Grid 2</a></li>
-                      <li><a href="shop-list.html">Shop list - Left sidebar</a></li>
-                      <li><a href="shop-list-2.html">Shop list - Right sidebar</a></li>
-                      <li><a href="shop-fullwidth.html">Shop Fullwidth</a></li>
-                      <li><a href="shop-single-product.html">Single Product</a></li>
-                      <li><a href="shop-single-product-2.html">Single Product 2</a></li>
-                      <li><a href="shop-single-product-3.html">Single Product 3</a></li>
-                      <li><a href="shop-single-product-4.html">Single Product 4</a></li>
-                      <li><a href="shop-cart.html">Shop Cart</a></li>
-                      <li><a href="shop-checkout.html">Shop Checkout</a></li>
-                      <li><a href="shop-compare.html">Shop Compare</a></li>
-                      <li><a href="shop-wishlist.html">Shop Wishlist</a></li>
-                    </ul>
-                  </li> -->
                   <li class="has-children"><a href="shop-vendor-list.html">Vendors</a>
                     <ul class="sub-menu">
                       <li><a href="shop-vendor-list.html">Vendors Listing</a></li>
                       <li><a href="shop-vendor-single.html">Vendor Single</a></li>
                     </ul>
                   </li>
-                  <!-- <li class="has-children"><a href="#">Pages</a>
-                    <ul class="sub-menu">
-                      <li><a href="page-about-us.html">About Us</a></li>
-                      <li><a href="page-contact.html">Contact Us</a></li>
-                      <li><a href="page-careers.html">Careers</a></li>
-                      <li><a href="page-term.html">Term and Condition</a></li>
-                      <li><a href="page-register.html">Register</a></li>
-                      <li><a href="page-login.html">Login</a></li>
-                      <li><a href="page-404.html">Error 404</a></li>
-                    </ul>
-                  </li> -->
                   <li class="has-children"><a href="blog.html">Blog</a>
                     <ul class="sub-menu">
                       <li><a href="blog.html">Blog - No Sidebar</a></li>
@@ -142,6 +101,7 @@
               </nav>
               <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
             </div>
+            @if(auth()->check())
             <div class="header-shop">
               <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-account"><span>Account</span></span>
                 <div class="dropdown-account">
@@ -183,6 +143,7 @@
                 </div>
               </div><a class="font-lg icon-list icon-compare" href="shop-compare.html"><span>Compare</span></a>
             </div>
+          @endif
           </div>
         </div>
       </div>
