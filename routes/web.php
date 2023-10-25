@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,19 +14,14 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
-Route::get('/about', function () {
-    return view('other.about');
-})->name('about');
-Route::get('/shop', function () {
-    return view('other.shop');
-})->name('shop');
-Route::get('/contact-us', function () {
-    return view('other.contact');
-})->name('contact');
 
+Route::get('/',[HomeController::class,'index'])->name('home');
+
+Route::prefix('/')->group(function () {
+    Route::get('about',[HomeController::class,'about'])->name('about');
+    Route::get('shop',[HomeController::class,'shop'])->name('shop');
+    Route::get('contact',[HomeController::class,'contact'])->name('contact');
+});
 
 Route::prefix('user')->group(function () {
     //------------ AUTH ------------
