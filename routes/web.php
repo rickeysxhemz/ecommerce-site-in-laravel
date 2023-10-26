@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,4 +34,7 @@ Route::prefix('user')->group(function () {
    
     Route::get('register', [AuthController::class, 'registerForm'])->name('register');
     Route::post('register-submit',[AuthController::class, 'register'])->name('register-submit');
+});
+Route::middleware(['auth'])->group(function () {
+Route::post('/cart/add', [CartController::class,'add_to_cart'])->name('cart.add');
 });

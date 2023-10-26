@@ -1,6 +1,6 @@
 @include('includes.layout')
 <body>
-@include('includes.header')   
+@include('includes.header',['cart' => $cart])   
 @include('includes.leftsidebar')
     <main class="main">
       <section class="section-box">
@@ -173,7 +173,17 @@
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$product->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
                       <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">$2856.3</strong><span class="color-gray-500 price-line">$3225.6</span></div>
-                      <div class="mt-20 box-btn-cart"><a class="btn btn-cart" href="shop-cart.html">Add To Cart</a></div>
+                      @if(auth()->check())
+                      <div class="mt-20 box-btn-cart">
+                          <form method="POST" action="{{ route('cart.add') }}">
+                              @csrf
+                              <input type="hidden" name="id" value="{{ $product->id }}">
+                              <button type="submit" class="btn btn-cart">Add To Cart</button>
+                          </form>
+                      </div>
+                      @else
+                      <div class="mt-20 box-btn-cart"><a class="btn btn-cart" href="{{route('login')}}">Add To Cart</a></div>
+                      @endif
                       <ul class="list-features">
                         <li>27-inch (diagonal) Retina 5K display</li>
                         <li>3.1GHz 6-core 10th-generation Intel Core i5</li>
@@ -197,7 +207,17 @@
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$best_seller->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
                       <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">$2325.3</strong><span class="color-gray-500 price-line">$2225.6</span></div>
-                      <div class="mt-20 box-btn-cart"><a class="btn btn-cart" href="shop-cart.html">Add To Cart</a></div>
+                      @if(auth()->check())
+                      <div class="mt-20 box-btn-cart">
+                          <form method="POST" action="{{ route('cart.add') }}">
+                              @csrf
+                              <input type="hidden" name="id" value="{{ $best_seller->id }}">
+                              <button type="submit" class="btn btn-cart">Add To Cart</button>
+                          </form>
+                      </div>
+                      @else
+                      <div class="mt-20 box-btn-cart"><a class="btn btn-cart" href="{{route('login')}}">Add To Cart</a></div>
+                      @endif
                       <ul class="list-features">
                         <li>27-inch (diagonal) Retina 5K display</li>
                         <li>3.1GHz 6-core 10th-generation Intel Core i5</li>
@@ -220,7 +240,17 @@
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$most_viewed->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
                       <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">$2325.3</strong><span class="color-gray-500 price-line">$2225.6</span></div>
-                      <div class="mt-20 box-btn-cart"><a class="btn btn-cart" href="shop-cart.html">Add To Cart</a></div>
+                      @if(auth()->check())
+                      <div class="mt-20 box-btn-cart">
+                          <form method="POST" action="{{ route('cart.add') }}">
+                              @csrf
+                              <input type="hidden" name="id" value="{{ $most_viewed->id }}">
+                              <button type="submit" class="btn btn-cart">Add To Cart</button>
+                          </form>
+                      </div>
+                      @else
+                      <div class="mt-20 box-btn-cart"><a class="btn btn-cart" href="{{route('login')}}">Add To Cart</a></div>
+                      @endif
                       <ul class="list-features">
                         <li>27-inch (diagonal) Retina 5K display</li>
                         <li>3.1GHz 6-core 10th-generation Intel Core i5</li>

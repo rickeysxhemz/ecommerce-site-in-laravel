@@ -115,36 +115,46 @@
                   </ul>
                 </div>
               </div><a class="font-lg icon-list icon-wishlist" href="shop-wishlist.html"><span>Wishlist</span><span class="number-item font-xs">5</span></a>
-              <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">2</span></span>
+              <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">{{count($cart)}}</span></span>
                 <div class="dropdown-cart">
-                  <div class="item-cart mb-20">
-                    <div class="cart-image"><img src="{{asset('assets/imgs/page/homepage1/imgsp5.png')}}" alt="Ecom"></div>
-                    <div class="cart-info"><a class="font-sm-bold color-brand-3" href="shop-single-product.html">2022 Apple iMac with Retina 5K Display 8GB RAM, 256GB SSD</a>
-                      <p><span class="color-brand-2 font-sm-bold">1 x $2856.4</span></p>
-                    </div>
-                  </div>
-                  <div class="item-cart mb-20">
-                    <div class="cart-image"><img src="{{asset('assets/imgs/page/homepage1/imgsp4.png')}}" alt="Ecom"></div>
-                    <div class="cart-info"><a class="font-sm-bold color-brand-3" href="shop-single-product-2.html">2022 Apple iMac with Retina 5K Display 8GB RAM, 256GB SSD</a>
-                      <p><span class="color-brand-2 font-sm-bold">1 x $2856.4</span></p>
-                    </div>
-                  </div>
-                  <div class="border-bottom pt-0 mb-15"></div>
-                  <div class="cart-total">
-                    <div class="row">
-                      <div class="col-6 text-start"><span class="font-md-bold color-brand-3">Total</span></div>
-                      <div class="col-6"><span class="font-md-bold color-brand-1">$2586.3</span></div>
-                    </div>
-                    <div class="row mt-15">
-                      <div class="col-6 text-start"><a class="btn btn-cart w-auto" href="shop-cart.html">View cart</a></div>
-                      <div class="col-6"><a class="btn btn-buy w-auto" href="shop-checkout.html">Checkout</a></div>
-                    </div>
-                  </div>
-                </div>
-              </div><a class="font-lg icon-list icon-compare" href="shop-compare.html"><span>Compare</span></a>
+                      @if (!empty($cart) && is_array($cart))
+                        @php
+                        $total = 0;
+                        @endphp
+
+                        @foreach ($cart as $item)
+                            @php
+                            $itemTotal = $item['price'] * $item['quantity']; 
+                            $total += $itemTotal;
+                            @endphp
+
+                            <div class="item-cart mb-20">
+                                <div class="cart-image"><img src="{{ asset('assets/imgs/page/homepage1/imgsp5.png') }}" alt="Ecom"></div>
+                                <div class="cart-info">
+                                    <a class="font-sm-bold color-brand-3" href="shop-single-product.html">{{ $item['name'] }}</a>
+                                    <p><span class="color-brand-2 font-sm-bold">{{ $item['quantity'] }} x ${{ $item['price'] }}</span></p>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        <div class="border-bottom pt-0 mb-15"></div>
+                        <div class="cart-total">
+                            <div class="row">
+                                <div class="col-6 text-start"><span class="font-md-bold color-brand-3">Total</span></div>
+                                <div class="col-6"><span class="font-md-bold color-brand-1">${{ number_format($total, 2) }}</span></div>
+                            </div>
+                            <div class="row mt-15">
+                                <div class="col-6 text-start"><a class="btn btn-cart w-auto" href="shop-cart.html">View cart</a></div>
+                                <div class="col-6"><a class="btn btn-buy w-auto" href="shop-checkout.html">Checkout</a></div>
+                            </div>
+                        </div>
+                    @endif
+
+              <!-- </div><a class="font-lg icon-list icon-compare" href="shop-compare.html"><span>Compare</span></a> -->
             </div>
-          @endif
+         
           </div>
+          @endif
         </div>
       </div>
     </header>
