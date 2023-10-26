@@ -11,7 +11,8 @@ class HomeService{
         $all_products=Product::all();
         $best_seller=Product::where('selling_count','>',10)->get();
         $most_viewed=Product::where('item_view_count','>',10)->get();
-        return view('index',compact('featured_categories','all_products','best_seller','most_viewed'));
+        $cart = session('cart', []);
+        return view('index',compact('featured_categories','all_products','best_seller','most_viewed','cart'));
     }
     public function about()
     {
