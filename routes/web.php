@@ -35,6 +35,10 @@ Route::prefix('user')->group(function () {
     Route::get('register', [AuthController::class, 'registerForm'])->name('register');
     Route::post('register-submit',[AuthController::class, 'register'])->name('register-submit');
 });
-Route::middleware(['auth'])->group(function () {
-Route::post('/cart/add', [CartController::class,'add_to_cart'])->name('cart.add');
+
+    Route::prefix('cart')->group(function () {
+        Route::get('/', [CartController::class,'cart'])->name('cart');
+        Route::post('/add', [CartController::class,'add_to_cart'])->name('cart.add');
+        Route::post('update',[CartController::class,'update_cart'])->name('cart.update');
+        Route::get('remove/{id}',[CartController::class,'remove_from_cart'])->name('cartDelete');
 });

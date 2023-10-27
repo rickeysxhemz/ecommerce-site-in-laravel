@@ -144,7 +144,7 @@
                                 <div class="col-6"><span class="font-md-bold color-brand-1">${{ number_format($total, 2) }}</span></div>
                             </div>
                             <div class="row mt-15">
-                                <div class="col-6 text-start"><a class="btn btn-cart w-auto" href="shop-cart.html">View cart</a></div>
+                                <div class="col-6 text-start"><a class="btn btn-cart w-auto" href="{{route('cart')}}">View cart</a></div>
                                 <div class="col-6"><a class="btn btn-buy w-auto" href="shop-checkout.html">Checkout</a></div>
                             </div>
                         </div>
