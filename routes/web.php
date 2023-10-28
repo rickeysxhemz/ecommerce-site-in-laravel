@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,4 +42,10 @@ Route::prefix('user')->group(function () {
         Route::post('/add', [CartController::class,'add_to_cart'])->name('cart.add');
         Route::post('update',[CartController::class,'update_cart'])->name('cart.update');
         Route::get('remove/{id}',[CartController::class,'remove_from_cart'])->name('cartDelete');
+});
+    Route::prefix('checkout')->group(function () {
+        Route::get('/', [PaymentController::class,'checkout'])->name('checkoutPage');
+        Route::post('/place-order',[PaymentController::class,'place_order'])->name('placeOrder');
+        Route::get('/payment',[PaymentController::class,'payment'])->name('payment');
+        Route::post('/payment-success',[PaymentController::class,'payment_success'])->name('paymentSuccess');
 });
