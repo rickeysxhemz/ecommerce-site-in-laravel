@@ -62,7 +62,8 @@ class PaymentController extends Controller
         $order_detail = Order::with([
             'products:id,title,buyBoxPrice'
         ])->where('status', 'paid')->where('id', $order_id)->get();
+        $products = $order_detail[0]['products']; 
         $cart = [];
-        return view('payment.order', compact('cart', 'order_detail'))->with('message', 'Payment was successful');
+        return view('payment.order', compact('cart', 'order_detail', 'products'))->with('message', 'Payment was successful');
     }
 }

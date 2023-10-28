@@ -78,12 +78,16 @@
               <div class="box-border">
                 <h5 class="font-md-bold mb-20">Your Order</h5>
                 <div class="listCheckout">
+                    @php
+                    $total = 0;
+                  @endphp
+                @foreach($products as $product)
                   <div class="item-wishlist">
                     <div class="wishlist-product">
                       <div class="product-wishlist">
                         <div class="product-image"><a href="shop-single-product.html"><img src="../assets/imgs/page/product/img-sub.png" alt="Ecom"></a></div>
                         <div class="product-info"><a href="shop-single-product.html">
-                            <h6 class="color-brand-3">Apple Watch Series 8 [GPS 45mm] Smart Watch</h6></a>
+                            <h6 class="color-brand-3">{{$product['title']}}</h6></a>
                           <div class="rating"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
                         </div>
                       </div>
@@ -92,16 +96,19 @@
                       <h5 class="color-gray-500">x1</h5>
                     </div>
                     <div class="wishlist-price">
-                      <h4 class="color-brand-3 font-lg-bold">$40</h4>
+                      <h4 class="color-brand-3 font-lg-bold">${{$product['buyBoxPrice']}}</h4>
                     </div>
                   </div>
-                  
+                  @php
+                   $total = $total + $product['buyBoxPrice'];
+                  @endphp
+                @endforeach
                 </div>
                
                 <div class="form-group mb-0">
                   <div class="row mb-10">
                     <div class="col-lg-6 col-6"><span class="font-md-bold color-brand-3">Subtotal</span></div>
-                    <div class="col-lg-6 col-6 text-end"><span class="font-lg-bold color-brand-3">$80</span></div>
+                    <div class="col-lg-6 col-6 text-end"><span class="font-lg-bold color-brand-3">${{$total}}</span></div>
                   </div>
                   <div class="border-bottom mb-10 pb-5">
                     <div class="row">
@@ -111,7 +118,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-6 col-6"><span class="font-md-bold color-brand-3">Total</span></div>
-                    <div class="col-lg-6 col-6 text-end"><span class="font-lg-bold color-brand-3">$90</span></div>
+                    <div class="col-lg-6 col-6 text-end"><span class="font-lg-bold color-brand-3">${{$total}}</span></div>
                   </div>
                 </div>
               </div>
