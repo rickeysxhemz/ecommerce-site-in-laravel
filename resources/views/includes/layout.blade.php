@@ -9,8 +9,10 @@
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/template/favicon.svg">
     <link href="{{ asset('assets/css/style.css?v=3.0.0') }}" rel="stylesheet">
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
   </head>

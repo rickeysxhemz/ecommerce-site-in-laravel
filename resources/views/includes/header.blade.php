@@ -115,7 +115,13 @@
                   </ul>
                 </div>
               </div><a class="font-lg icon-list icon-wishlist" href="shop-wishlist.html"><span>Wishlist</span><span class="number-item font-xs">5</span></a>
-              <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">{{count($cart)}}</span></span>
+              <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">
+              @if(is_array($cart) && count($cart) > 0)
+                  {{ count($cart) }}
+              @else
+                  0
+              @endIf
+              </span></span>
                 <div class="dropdown-cart">
                       @if (!empty($cart) && is_array($cart))
                         @php
@@ -145,7 +151,7 @@
                             </div>
                             <div class="row mt-15">
                                 <div class="col-6 text-start"><a class="btn btn-cart w-auto" href="{{route('cart')}}">View cart</a></div>
-                                <div class="col-6"><a class="btn btn-buy w-auto" href="shop-checkout.html">Checkout</a></div>
+                                <div class="col-6"><a class="btn btn-buy w-auto" href="{{route('checkoutPage')}}">Checkout</a></div>
                             </div>
                         </div>
                     @endif
