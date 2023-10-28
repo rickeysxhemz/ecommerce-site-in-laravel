@@ -21,7 +21,8 @@
             @endif
     <h3>Payment Method</h3>
     <!-- <p class="font-md color-gray-500">Access to all features. No credit card required.</p> -->
-    <form method="POST" action="{{ route('paymentSuccess') }}">
+    <form method="POST" action="{{ route('paymentSuccess') }}" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_test_51O6AuDIRfdT0jn8QnWgrdM6LeixpXeCdeyYq91mxZlPTizBgErNKUgdQDa35JNuzaNR33leGFsdGbg6LURkCiZkg00sEyTSBJd"
+                       >
         @csrf <!-- Add the CSRF token -->
 
         <div class="form-register mt-30 mb-30">
@@ -35,11 +36,11 @@
             </div>
             <div class="form-group">
                 <label class="mb-5 font-sm color-gray-700">Card Number *</label>
-                <input class="form-control" type="tel" name="card_number" maxlength="19" placeholder="XXXXXXXXXXXXXXXXXX">
+                <input class="form-control card-number" type="tel" name="card_number" maxlength="19" placeholder="XXXXXXXXXXXXXXXXXX">
             </div>
             <div class="form-group">
                 <label class="mb-5 font-sm color-gray-700">CVV *</label>
-                <input class="form-control" type="text" name="cvv" maxlength="3" placeholder="123">
+                <input class="form-control card-cvc" type="text" name="cvv" maxlength="3" placeholder="123">
             </div>
             <div class="form-group">
                 
@@ -52,11 +53,11 @@
 
             <div class="form-group">
                 <label class="mb-5 font-sm color-gray-700">Month *</label>
-                <input class="form-control" type="text" name="month" maxlength="2" placeholder="12">
+                <input class="form-control card-expiry-month" type="text" name="month" maxlength="2" placeholder="12">
             </div>
             <div class="form-group">
                 <label class="mb-5 font-sm color-gray-700">Year *</label>
-                <input class="form-control" type="text" name="year" maxlength="4" placeholder="2023">
+                <input class="form-control card-expiry-year" type="text" name="year" maxlength="4" placeholder="2023">
             </div>
             <!-- <div class="form-group">
                 <label>
@@ -121,6 +122,76 @@
         @if(Session::has('error'))
             toastr.error("{{ Session::get('error') }}");
         @endif
+    </script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    
+    <script type="text/javascript">
+      
+    $(function() {
+      
+        /*------------------------------------------
+        --------------------------------------------
+        Stripe Payment Code
+        --------------------------------------------
+        --------------------------------------------*/
+        
+        var $form = $(".require-validation");
+         
+        $('form.require-validation').bind('submit', function(e) {
+            var $form = $(".require-validation"),
+            inputSelector = ['input[type=email]', 'input[type=password]',
+                             'input[type=text]', 'input[type=file]',
+                             'textarea'].join(', '),
+            $inputs = $form.find('.required').find(inputSelector),
+            $errorMessage = $form.find('div.error'),
+            valid = true;
+            $errorMessage.addClass('hide');
+        
+            $('.has-error').removeClass('has-error');
+            $inputs.each(function(i, el) {
+              var $input = $(el);
+              if ($input.val() === '') {
+                $input.parent().addClass('has-error');
+                $errorMessage.removeClass('hide');
+                e.preventDefault();
+              }
+            });
+         
+            if (!$form.data('cc-on-file')) {
+              e.preventDefault();
+              Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+              Stripe.createToken({
+                number: $('.card-number').val(),
+                cvc: $('.card-cvc').val(),
+                exp_month: $('.card-expiry-month').val(),
+                exp_year: $('.card-expiry-year').val()
+              }, stripeResponseHandler);
+            }
+        
+        });
+          
+        /*------------------------------------------
+        --------------------------------------------
+        Stripe Response Handler
+        --------------------------------------------
+        --------------------------------------------*/
+        function stripeResponseHandler(status, response) {
+            if (response.error) {
+                $('.error')
+                    .removeClass('hide')
+                    .find('.alert')
+                    .text(response.error.message);
+            } else {
+                /* token contains id, last4, and card type */
+                var token = response['id'];
+                     
+                $form.find('input[type=text]').empty();
+                $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+                $form.get(0).submit();
+            }
+        }
+         
+    });
     </script>
   </body>
 </html>

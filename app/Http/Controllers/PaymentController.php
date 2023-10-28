@@ -42,8 +42,9 @@ class PaymentController extends Controller
     public function payment_success(Request $request)
     {
         // dd($request->all());
-       $api_key = env('STRIPE_SECRET');
-        Stripe::setApiKey($api_key);
+    //    $api_key = 'sk_test_51O6AuDIRfdT0jn8QNNiFYWikU7oUATwdEvvAfJa7zB6dnBogZGO7JOk9h7Z7Q7M03dgMKVsuU5KJ8T9KC2rsk0Xy00CX7Oesnc';
+    //    dd($api_key);
+        Stripe::setApiKey('sk_test_51O6AuDIRfdT0jn8QNNiFYWikU7oUATwdEvvAfJa7zB6dnBogZGO7JOk9h7Z7Q7M03dgMKVsuU5KJ8T9KC2rsk0Xy00CX7Oesnc');
         
         $token = $request->stripeToken;
         $charge = Charge::create([
@@ -56,7 +57,12 @@ class PaymentController extends Controller
         $order = Order::find($order_id);
         $order->status = 'paid';
         $order->save();
-        session()->forget('cart');
-        return view('index')->with('message', 'Payment was successful');
+        // session()->forget('cart');
+
+        $order_detail = Order::with([
+            'products:id,title,buyBoxPrice'
+        ])->where('status', 'paid')->where('id', $order_id)->get();
+        $cart = [];
+        return view('payment.order', compact('cart', 'order_detail'))->with('message', 'Payment was successful');
     }
 }
