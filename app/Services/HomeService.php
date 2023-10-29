@@ -13,6 +13,9 @@ class HomeService{
         $best_seller=Product::where('selling_count','>',10)->get();
         $most_viewed=Product::where('item_view_count','>',10)->get();
         $favourite_count=FavouriteProduct::where('user_id',Auth::user()->id)->count();
+        if($favourite_count > 0) {
+            session(['favourite_count' => $favourite_count]);
+        }
         $cart = session('cart', []);
         // session()->forget('cart');
         // dd($cart);
@@ -39,6 +42,10 @@ class HomeService{
     }
     public function add_wishlist($id)
     {
+        $exist=FavouriteProduct::where('product_id',$id)->where('user_id',Auth::user()->id)->count();
+        if($exist > 0) {
+            return redirect()->back()->with('message', 'Product already added to wishlist');
+        }
         $favourite_product = new FavouriteProduct();
         $favourite_product->user_id = Auth::user()->id;
         $favourite_product->product_id = $id;
