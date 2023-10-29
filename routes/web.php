@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,4 +52,7 @@ Route::prefix('user')->group(function () {
         Route::post('/place-order',[PaymentController::class,'place_order'])->name('placeOrder');
         Route::get('/payment',[PaymentController::class,'payment'])->name('payment');
         Route::post('/payment-success',[PaymentController::class,'payment_success'])->name('paymentSuccess');
+});
+Route::prefix('order')->group(function () {
+    Route::get('detail', [OrderController::class,'orderDetail'])->name('order.detail');
 });

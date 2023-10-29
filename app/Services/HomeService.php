@@ -12,9 +12,11 @@ class HomeService{
         $all_products=Product::all();
         $best_seller=Product::where('selling_count','>',10)->get();
         $most_viewed=Product::where('item_view_count','>',10)->get();
-        $favourite_count=FavouriteProduct::where('user_id',Auth::user()->id)->count();
-        if($favourite_count > 0) {
-            session(['favourite_count' => $favourite_count]);
+        if(Auth::user()){
+            $favourite_count=FavouriteProduct::where('user_id',Auth::user()->id)->count();
+            if($favourite_count > 0) {
+                session(['favourite_count' => $favourite_count]);
+            }
         }
         $cart = session('cart', []);
         // session()->forget('cart');
@@ -56,6 +58,10 @@ class HomeService{
     {
         $favourite_product=FavouriteProduct::where('product_id',$id)->where('user_id',Auth::user()->id)->first();
         $favourite_product->delete();
+        if(session('favourite_count') > 0){
+            $favourite_count = session('favourite_count') - 1;
+            session(['favourite_count' => $favourite_count]);
+        }
         return redirect()->back()->with('message', 'Product deleted from wishlist successfully');
     }
     

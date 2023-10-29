@@ -108,7 +108,7 @@
                   <ul>
                     <li><a href="page-account.html">My Account</a></li>
                     <li><a href="page-account.html">Order Tracking</a></li>
-                    <li><a href="page-account.html">My Orders</a></li>
+                    <li><a href="{{route('order.detail')}}">My Orders</a></li>
                     <li><a href="page-account.html">My Wishlist</a></li>
                     <li><a href="page-account.html">Setting</a></li>
                     <li><a href="page-login.html">Sign out</a></li>

@@ -57,7 +57,7 @@ class PaymentController extends Controller
         $order = Order::find($order_id);
         $order->status = 'paid';
         $order->save();
-        // session()->forget('cart');
+        session()->forget('cart');
 
         $order_detail = Order::with([
             'products:id,title,buyBoxPrice'
