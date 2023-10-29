@@ -27,5 +27,16 @@ class HomeController extends Controller
     {
         return $this->homeService->contact();
     }
-    
+    public function wishlist()
+    {
+        return $this->homeService->wishlist();
+    }
+    public function add_wishlist($id)
+    {
+        return $this->homeService->add_wishlist($id);
+    }
+    public function delete_wishlist($id)
+    {
+        return $this->homeService->delete_wishlist($id);
+    }
 }

@@ -23,6 +23,9 @@ Route::prefix('/')->group(function () {
     Route::get('about',[HomeController::class,'about'])->name('about');
     Route::get('shop',[HomeController::class,'shop'])->name('shop');
     Route::get('contact',[HomeController::class,'contact'])->name('contact');
+    Route::get('wishlist',[HomeController::class,'wishlist'])->name('wishlist');
+    Route::get('add-wishlist/{id}',[HomeController::class,'add_wishlist'])->name('addWishlist');
+    Route::get('delete-wishlist/{id}',[HomeController::class,'delete_wishlist'])->name('deleteWishlist');
 });
 
 Route::prefix('user')->group(function () {
