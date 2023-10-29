@@ -114,7 +114,7 @@
                     <li><a href="page-login.html">Sign out</a></li>
                   </ul>
                 </div>
-              </div><a class="font-lg icon-list icon-wishlist" href="shop-wishlist.html"><span>Wishlist</span><span class="number-item font-xs">5</span></a>
+              </div><a class="font-lg icon-list icon-wishlist" href="{{route('wishlist')}}"><span>Wishlist</span><span class="number-item font-xs">5</span></a>
               <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">
               @if(is_array($cart) && count($cart) > 0)
                   {{ count($cart) }}
