@@ -5,6 +5,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\FavouriteProduct;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 class HomeService{
     public function index()
     {
@@ -17,30 +18,54 @@ class HomeService{
             if($favourite_count > 0) {
                 session(['favourite_count' => $favourite_count]);
             }
-        }
-        $cart = session('cart', []);
+        
+        $cart = Cart::with('product')
+        ->where('user_id',Auth::user()->id)->get();
+        return view('index',compact('featured_categories','all_products','best_seller','most_viewed','cart'));
+    }
         // session()->forget('cart');
         // dd($cart);
-        return view('index',compact('featured_categories','all_products','best_seller','most_viewed','cart'));
+        return view('index',compact('featured_categories','all_products','best_seller','most_viewed'));
+        
     }
     public function about()
     {
-        return view('other.about');
+        if(Auth::user()){
+        $cart = Cart::with('product')
+        ->where('user_id',Auth::user()->id)->get();
+        return view('other.about',compact('cart'));}
+        else{
+            return view('other.about');
+        }
     }
     public function shop()
     {
-        return view('other.shop');
+        if(Auth::user()){
+            $cart = Cart::with('product')
+            ->where('user_id',Auth::user()->id)->get();
+        return view('other.shop',compact('cart'));}
+        else{
+            return view('other.shop');
+        }
     }
     public function contact()
     {
-        return view('other.contact');
+        if(Auth::user()){
+            $cart = Cart::with('product')
+            ->where('user_id',Auth::user()->id)->get();
+        return view('other.contact',compact('cart'));}
+        else{
+            return view('other.contact');
+        }
     }
     public function wishlist()
     {
+        if(Auth::user()){
         $favourite_products=FavouriteProduct::with('products')->where('user_id',Auth::user()->id)->get();
-        // dd($favourite_products);
-        $cart = session('cart', []);
+        $cart = Cart::with('product')
+            ->where('user_id',Auth::user()->id)->get();
         return view('account.wishlist',compact('cart','favourite_products'));
+        }
     }
     public function add_wishlist($id)
     {

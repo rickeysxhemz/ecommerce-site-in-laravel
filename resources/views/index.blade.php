@@ -1,6 +1,10 @@
 @include('includes.layout')
 <body>
-@include('includes.header',['cart' => $cart])   
+@if(isset($cart))
+    @include('includes.header', ['cart' => $cart])
+@else
+    @include('includes.header')
+@endif 
 @include('includes.leftsidebar')
     <main class="main">
       <section class="section-box">
@@ -178,6 +182,7 @@
                           <form method="POST" action="{{ route('cart.add') }}">
                               @csrf
                               <input type="hidden" name="id" value="{{ $product->id }}">
+                              <input type="hidden" name="price" value="{{ $product->buyBoxPrice}}">
                               <button type="submit" class="btn btn-cart">Add To Cart</button>
                           </form>
                       </div>

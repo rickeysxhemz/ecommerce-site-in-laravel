@@ -1,6 +1,10 @@
 @include('includes.layout')
 <body>
-@include('includes.header')   
+@if(isset($cart))
+    @include('includes.header', ['cart' => $cart])
+@else
+    @include('includes.header')
+@endif 
 @include('includes.leftsidebar')
     <main class="main">
       <div class="section-box">

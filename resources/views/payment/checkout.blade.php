@@ -1,6 +1,10 @@
 @include('includes.layout')
 <body>
-@include('includes.header')   
+@if(isset($cart))
+    @include('includes.header', ['cart' => $cart])
+@else
+    @include('includes.header')
+@endif
 @include('includes.leftsidebar')
     <main class="main">
       <div class="section-box">
@@ -107,13 +111,13 @@
               <div class="box-border">
                 <h5 class="font-md-bold mb-20">Your Order</h5>
                 <div class="listCheckout">
-                @if (!empty($cart) && is_array($cart))
+               
                         @php
                         $total = 0;
                         @endphp
                 @foreach ($cart as $item)
                             @php
-                            $itemTotal = $item['price'] * $item['quantity']; 
+                            $itemTotal = $item->price * $item->quantity; 
                             $total += $itemTotal;
                             @endphp
                   <div class="item-wishlist">
@@ -121,54 +125,22 @@
                       <div class="product-wishlist">
                         <div class="product-image"><a href="shop-single-product.html"><img src="assets/imgs/page/product/img-sub.png" alt="Ecom"></a></div>
                         <div class="product-info"><a href="shop-single-product.html">
-                            <h6 class="color-brand-3">{{$item['name']}}</h6></a>
+                        @foreach($item->product as $product)    
+                        <h6 class="color-brand-3">{{$product->title}}</h6></a>
+                        @endforeach
                           <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
                         </div>
                       </div>
                     </div>
                     <div class="wishlist-status">
-                      <h5 class="color-gray-500">x{{$item['quantity']}}</h5>
+                      <h5 class="color-gray-500">x{{$item->quantity}}</h5>
                     </div>
                     <div class="wishlist-price">
-                      <h4 class="color-brand-3 font-lg-bold">${{$item['price']}}</h4>
+                      <h4 class="color-brand-3 font-lg-bold">${{$item->price}}</h4>
                     </div>
                   </div>
                   @endforeach
-                  @endif
-                  <!-- <div class="item-wishlist">
-                    <div class="wishlist-product">
-                      <div class="product-wishlist">
-                        <div class="product-image"><a href="shop-single-product.html"><img src="assets/imgs/page/product/img-sub2.png" alt="Ecom"></a></div>
-                        <div class="product-info"><a href="shop-single-product.html">
-                            <h6 class="color-brand-3">HP 24 All-in-One PC, Intel Core i3-1115G4, 4GB RAM</h6></a>
-                          <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="wishlist-status">
-                      <h5 class="color-gray-500">x1</h5>
-                    </div>
-                    <div class="wishlist-price">
-                      <h4 class="color-brand-3 font-lg-bold">$1.51</h4>
-                    </div>
-                  </div> -->
-                  <!-- <div class="item-wishlist">
-                    <div class="wishlist-product">
-                      <div class="product-wishlist">
-                        <div class="product-image"><a href="shop-single-product.html"><img src="assets/imgs/page/product/img-sub3.png" alt="Ecom"></a></div>
-                        <div class="product-info"><a href="shop-single-product.html">
-                            <h6 class="color-brand-3">Dell Optiplex 9020 Small Form Business Desktop Tower PC</h6></a>
-                          <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="wishlist-status">
-                      <h5 class="color-gray-500">x1</h5>
-                    </div>
-                    <div class="wishlist-price">
-                      <h4 class="color-brand-3 font-lg-bold">$3.51</h4>
-                    </div>
-                  </div> -->
+                
                 </div>
                 <div class="form-group d-flex mt-15">
                   <input class="form-control mr-15" placeholder="Enter Your Coupon">
