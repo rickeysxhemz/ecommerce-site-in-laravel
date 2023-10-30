@@ -8,7 +8,7 @@
           <div class="row mb-100">
             <div class="col-lg-1"></div>
             <div class="col-lg-5">
-            @if (!empty($cart) && is_array($cart))
+           
                         @php
                         $total = 0;
                         @endphp
@@ -18,7 +18,7 @@
                             $total += $itemTotal;
                             @endphp
                 @endforeach
-            @endif
+            
     <h3>Payment Method</h3>
     <!-- <p class="font-md color-gray-500">Access to all features. No credit card required.</p> -->
     <form method="POST" action="{{ route('paymentSuccess') }}" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_test_51O6AuDIRfdT0jn8QnWgrdM6LeixpXeCdeyYq91mxZlPTizBgErNKUgdQDa35JNuzaNR33leGFsdGbg6LURkCiZkg00sEyTSBJd"
@@ -46,11 +46,6 @@
                 
                 <input class="form-control" type="hidden" name="order_id" value="{{ request('order_id') }}">
             </div>
-            <div class="form-group">
-                
-                <input class="form-control" type="hidden" name="stripeToken" value="pk_test_51O6AuDIRfdT0jn8QnWgrdM6LeixpXeCdeyYq91mxZlPTizBgErNKUgdQDa35JNuzaNR33leGFsdGbg6LURkCiZkg00sEyTSBJd">
-            </div>
-
             <div class="form-group">
                 <label class="mb-5 font-sm color-gray-700">Month *</label>
                 <input class="form-control card-expiry-month" type="text" name="month" maxlength="2" placeholder="12">

@@ -7,17 +7,25 @@ use App\Models\Order;
 use Stripe\Stripe;
 use Stripe\Charge;
 use App\Models\Payment;
+use Illuminate\Support\Str;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
+
 
 class PaymentController extends Controller
 {
     public function checkout()
     {
-        $cart = session('cart', []);
+        $cart = Cart::with('product')
+        ->where('user_id',Auth::user()->id)->get();
         return view('payment.checkout', compact('cart'));
     }
     public function place_order(Request $request)
     {
         $order = new Order();
+        $orderNumber = 'ORD' . Str::random(8);
+        $order->order_no = $orderNumber;
         $order->first_name = $request->first_name;
         $order->last_name = $request->last_name;
         $order->address_1 = $request->address_1;
@@ -26,9 +34,9 @@ class PaymentController extends Controller
         $order->phone = $request->phone;
         $order->description = $request->info;
         $order->save();
-        $cart = session('cart', []);
+        $cart = Cart::where('user_id', Auth::user()->id)->get();
         foreach ($cart as $item) {
-            $order->products()->attach($item['id'], ['quantity' => $item['quantity']]);
+            $order->products()->attach($item->id, ['quantity' => $item->quantity]);
         }
         $order_id = $order->id;
         // session()->forget('cart');
@@ -36,7 +44,8 @@ class PaymentController extends Controller
     }
     public function payment()
     {
-        $cart = session('cart', []);
+        $cart = Cart::with('product')
+        ->where('user_id',Auth::user()->id)->get();
         return view('payment.payment', compact('cart'));
     }
     public function payment_success(Request $request)
@@ -64,6 +73,8 @@ class PaymentController extends Controller
         ])->where('status', 'paid')->where('id', $order_id)->get();
         $products = $order_detail[0]['products']; 
         $cart = [];
-        return view('payment.order', compact('cart', 'order_detail', 'products'))->with('message', 'Payment was successful');
+        // return redirect('payment.order', compact('cart', 'order_detail', 'products'))->with('message', 'Payment was successful');
+        return redirect()->route('checkoutPage', compact('cart', 'order_detail', 'products'))->with('message', 'Payment was successful');
+
     }
 }

@@ -1,6 +1,6 @@
 @include('includes.layout')
 <body>
-@include('includes.header',['cart' => $cart])   
+@include('includes.header',['cart' => $cart])    
 @include('includes.leftsidebar')
     <main class="main">
       <div class="section-box">
@@ -37,7 +37,7 @@
                         @endphp
                   @foreach($cart as $item)
                             @php
-                            $itemTotal = $item['price'] * $item['quantity']; 
+                            $itemTotal = $item->price * $item->quantity; 
                             $total += $itemTotal;
                             @endphp
                   <div class="item-wishlist">
@@ -48,33 +48,38 @@
                       <div class="product-wishlist">
                         <div class="product-image"><a href="shop-single-product.html"><img src="assets/imgs/page/product/img-sub.png" alt="Ecom"></a></div>
                         <div class="product-info"><a href="shop-single-product.html">
-                            <h6 class="color-brand-3">{{$item['name']}}</h6></a>
+                          @foreach($item->product as $product)
+                            <h6 class="color-brand-3">{{$product->title}}</h6></a>
+                            @endforeach
                           <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
                         </div>
                       </div>
                     </div>
                     <div class="wishlist-price">
-                      <h4 class="color-brand-3">${{$item['price']}}</h4>
+                      <h4 class="color-brand-3">${{$item->price}}</h4>
                     </div>
-                    <div class="wishlist-status">
+                    <div class="wishlist-status" >
                       <div class="box-quantity">
                         <div class="input-quantity">
-                        <input class="font-xl color-brand-3 quantityInput" type="text" value="{{$item['quantity']}}"><span class="minus-cart"></span><span class="plus-cart"></span>
-                        <input type="hidden" name="id" class="productId" value="{{$item['id']}}">
+                        <input class="font-xl color-brand-3 quantityInput" type="text" value="{{$item->quantity}}">
+                        <!-- <span class="minus-cart"></span><span class="plus-cart"></span> -->
+                        <span class="minus-cart" data-product-id="{{$item->product_id}}"></span>
+                        <span class="plus-cart" data-product-id="{{$item->product_id}}"></span>
+                        <input type="hidden" name="id" class="productId" value="{{$item->id}}">
                         </div>
                       </div>
                     </div>
-                    <div class="wishlist-action">
-                      <h4 class="color-brand-3">${{$itemTotal}}</h4>
+                    <div class="wishlist-action unique" data-unique-id="{{$item->product_id}}">
+                      <h4 class="color-brand-3 subtotal">${{$itemTotal}}</h4>
                     </div>
-                    <div class="wishlist-remove"><a class="btn btn-delete" href="{{ route('cartDelete', ['id' => $item['id']]) }}"></a></div>
+                <div class="wishlist-remove"><a class="btn btn-delete" href="{{ route('cartDelete', ['id' => $item->id]) }}"></a></div>
                   </div>
                   @endforeach
 
                 </div>
                 <div class="row mb-40">
                   <div class="col-lg-6 col-md-6 col-sm-6-col-6"><a class="btn btn-buy w-auto arrow-back mb-10" href="shop-grid.html">Continue shopping</a></div>
-                  <div class="col-lg-6 col-md-6 col-sm-6-col-6 text-md-end"><a class="btn btn-buy w-auto update-cart mb-10" id="updateCartButton" href="#">Update cart</a></div>
+                  <div class="col-lg-6 col-md-6 col-sm-6-col-6 text-md-end"><a class="btn btn-buy w-auto update-cart mb-10" href="{{route('cart')}}" >Update cart</a></div>
                 </div>
                 <div class="row mb-50">
                   <div class="col-lg-6 col-md-6">
@@ -113,7 +118,7 @@
                 <div class="border-bottom mb-10">
                   <div class="row">
                     <div class="col-6"><span class="font-md-bold color-gray-500">Subtotal</span></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end total-display ">
                       <h4>	${{ number_format($total, 2) }}</h4>
                     </div>
                   </div>
@@ -137,7 +142,7 @@
                 <div class="mb-10">
                   <div class="row">
                     <div class="col-6"><span class="font-md-bold color-gray-500">Total</span></div>
-                    <div class="col-6 text-end">
+                    <div class="col-6 text-end total-display">
                       <h4>	${{ number_format($total, 2) }}</h4>
                     </div>
                   </div>
@@ -648,33 +653,60 @@
       </div>
     </main>
    @include('includes.footer')
-   <script>
-$(document).ready(function() {
- 
-  $("#updateCartButton").click(function(e) {
-    e.preventDefault();
-    var cartData = [];
-    
-    $(".item-wishlist").each(function() {
-      var productId = $(this).find(".productId").val();
-      var quantity = $(this).find(".quantityInput").val();
-      cartData.push({ id: productId, quantity: quantity });
-    });
    
+<script>
+$(document).ready(function() {
+    // Listen for clicks on the "plus" button
+    $('.plus-cart').click(function() {
+        updateQuantity(this, 1);
+    });
+
+    // Listen for clicks on the "minus" button
+    $('.minus-cart').click(function() {
+        updateQuantity(this, -1);
+    });
+
+    function updateQuantity(button, increment) {
+        var productId = $(button).data('product-id');
+        var $quantityInput = $(button).siblings('.quantityInput');
+        var quantity = parseInt($quantityInput.val()) + increment;
+
+ 
+    //csrf token
+    var csrf="{{csrf_token()}}";
+
     $.ajax({
-      url: "/cart/update",
-      type: "POST",
-      data: { cart: cartData, _token: '{{ csrf_token() }}' },
-      success: function(response) {
-        // console.log("Cart updated successfully");
-        window.location.reload();
+      type: 'POST',
+      url: '{{ route('updateQuantity') }}',
+      data: {
+        _token:csrf,
+        productId: productId,
+        quantity: quantity
       },
-      error: function(xhr, status, error) {
-        console.error("Error updating cart: " + error);
+      success: function(response) {
+
+        $quantityInput.val(quantity);
+        var subtotal = response.itemTotal;
+        var p=response.productId;
+        var $itemStatus = $('.unique[data-unique-id="' + p + '"]');
+        var $itemSubtotal = $itemStatus.find('.subtotal');
+        $itemSubtotal.text('$' + subtotal);
+
+
+        var total =parseInt(response.total);
+        var fixed=total.toFixed(2);
+        console.log(fixed)
+        // Update the displayed total for the cart
+        var $cartTotal = $('.total-display h4');
+        $cartTotal.text('$' + fixed);
+        
       }
     });
-  });
+  }
 });
+</script>
+<script>
+
 </script>
         @if(Session::has('message'))
             toastr.success("{{ Session::get('message') }}");

@@ -101,7 +101,7 @@
               </nav>
               <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
             </div>
-            @if(auth()->check())
+          @if(auth()->check())
             <div class="header-shop">
               <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-account"><span>Account</span></span>
                 <div class="dropdown-account">
@@ -120,29 +120,35 @@
               @endif
             </a>
               <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">
-              @if(is_array($cart) && count($cart) > 0)
-                  {{ count($cart) }}
-              @else
-                  0
-              @endIf
-              </span></span>
+              @php
+                $i=0;
+              @endphp
+              @foreach ($cart as $item)
+              @php
+                $i++;
+              @endphp
+              @endforeach
+              {{$i}}  
+            </span></span>
                 <div class="dropdown-cart">
-                      @if (!empty($cart) && is_array($cart))
+                      
                         @php
                         $total = 0;
                         @endphp
 
                         @foreach ($cart as $item)
                             @php
-                            $itemTotal = $item['price'] * $item['quantity']; 
+                            $itemTotal = $item->price * $item->quantity; 
                             $total += $itemTotal;
                             @endphp
 
                             <div class="item-cart mb-20">
                                 <div class="cart-image"><img src="{{ asset('assets/imgs/page/homepage1/imgsp5.png') }}" alt="Ecom"></div>
                                 <div class="cart-info">
-                                    <a class="font-sm-bold color-brand-3" href="shop-single-product.html">{{ $item['name'] }}</a>
-                                    <p><span class="color-brand-2 font-sm-bold">{{ $item['quantity'] }} x ${{ $item['price'] }}</span></p>
+                                  @foreach($item->product as $product)
+                                    <a class="font-sm-bold color-brand-3" href="shop-single-product.html">{{ $product->title }}</a>
+                                  @endforeach
+                                    <p><span class="color-brand-2 font-sm-bold">{{ $item->quantity }} x ${{ $item->price }}</span></p>
                                 </div>
                             </div>
                         @endforeach
@@ -158,12 +164,12 @@
                                 <div class="col-6"><a class="btn btn-buy w-auto" href="{{route('checkoutPage')}}">Checkout</a></div>
                             </div>
                         </div>
-                    @endif
+                    
 
               <!-- </div><a class="font-lg icon-list icon-compare" href="shop-compare.html"><span>Compare</span></a> -->
             </div>
          
-          </div>
+           </div>
           @endif
         </div>
       </div>
