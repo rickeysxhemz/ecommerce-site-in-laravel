@@ -147,7 +147,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="box-button"><a class="btn btn-buy" href="shop-checkout.html">Proceed To CheckOut</a></div>
+                <div class="box-button"><a class="btn btn-buy" href="{{route('checkoutPage')}}">Proceed To CheckOut</a></div>
               </div>
             </div>
           </div>

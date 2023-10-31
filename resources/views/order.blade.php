@@ -14,8 +14,8 @@
               <li><a class="active" href="#tab-notification" data-bs-toggle="tab" role="tab" aria-controls="tab-notification" aria-selected="true">Notification</a></li>
               <li><a href="#tab-wishlist" data-bs-toggle="tab" role="tab" aria-controls="tab-wishlist" aria-selected="true">Wishlist</a></li>
               <li><a href="#tab-orders" data-bs-toggle="tab" role="tab" aria-controls="tab-orders" aria-selected="true">Orders</a></li>
-              <li><a href="#tab-order-tracking" data-bs-toggle="tab" role="tab" aria-controls="tab-order-tracking" aria-selected="true">Order Tracking</a></li>
-              <li><a href="#tab-setting" data-bs-toggle="tab" role="tab" aria-controls="tab-setting" aria-selected="true">Setting</a></li>
+              <!-- <li><a href="#tab-order-tracking" data-bs-toggle="tab" role="tab" aria-controls="tab-order-tracking" aria-selected="true">Order Tracking</a></li>
+              <li><a href="#tab-setting" data-bs-toggle="tab" role="tab" aria-controls="tab-setting" aria-selected="true">Setting</a></li> -->
             </ul>
             <div class="border-bottom mt-20 mb-40"></div>
             <div class="tab-content mt-30">
@@ -105,7 +105,7 @@
                   <div class="body-orders">
                     <div class="list-orders">
                       <div class="item-orders">
-                        <div class="image-orders"><img src="assets/imgs/page/account/img-1.png" alt="Ecom"></div>
+                        <div class="image-orders"><img src="../assets/imgs/page/account/img-1.png" alt="Ecom"></div>
                         <div class="info-orders">
                           <h5>{{$product->product->title}}</h5>
                         </div>
@@ -113,21 +113,11 @@
                           <h5>Quantity: {{$product->quantity}}</h5>
                         </div>
                         <div class="price-orders">
-                          <h3>${{ number_format($product->product->buyBoxPrice, 2) }}</h3>
+                        <h3>$ <?php $price = $product->quantity *  $product->product->buyBoxPrice;
+                               echo $price;
+                          ?> </h3>
                         </div>
                       </div>
-                      <!-- <div class="item-orders">
-                        <div class="image-orders"><img src="assets/imgs/page/account/img-1.png" alt="Ecom"></div>
-                        <div class="info-orders">
-                          <h5>Samsung 36" French door 28 cu. ft. Smart Energy Star Refrigerator</h5>
-                        </div>
-                        <div class="quantity-orders">
-                          <h5>Quantity: 01</h5>
-                        </div>
-                        <div class="price-orders">
-                          <h3>$2.51</h3>
-                        </div>
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -151,7 +141,9 @@
                           <h5>Quantity: {{$product->quantity}}</h5>
                         </div>
                         <div class="price-orders">
-                          <h3>${{ number_format($product->product->buyBoxPrice, 2) }}</h3>
+                          <h3>$ <?php $price = $product->quantity *  $product->product->buyBoxPrice;
+                               echo $price;
+                          ?> </h3>
                         </div>
                       </div>
                      
@@ -178,7 +170,9 @@
                           <h5>Quantity: {{$product->quantity}}</h5>
                         </div>
                         <div class="price-orders">
-                          <h3>${{ number_format($product->product->buyBoxPrice, 2) }}</h3>
+                        <h3>$ <?php $price = $product->quantity *  $product->product->buyBoxPrice;
+                               echo $price;
+                          ?> </h3>
                         </div>
                       </div>
                      
@@ -199,7 +193,7 @@
                   </ul>
                 </nav>
               </div>
-              <div class="tab-pane fade" id="tab-order-tracking" role="tabpanel" aria-labelledby="tab-order-tracking">
+              <!-- <div class="tab-pane fade" id="tab-order-tracking" role="tabpanel" aria-labelledby="tab-order-tracking">
                 <p class="font-md color-gray-600">To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on<br class="d-none d-lg-block">your receipt and in the confirmation email you should have received.</p>
                 <div class="row mt-30">
                   <div class="col-lg-6">
@@ -403,7 +397,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

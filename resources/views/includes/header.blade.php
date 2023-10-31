@@ -106,12 +106,8 @@
               <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-account"><span>Account</span></span>
                 <div class="dropdown-account">
                   <ul>
-                    <li><a href="page-account.html">My Account</a></li>
-                    <li><a href="page-account.html">Order Tracking</a></li>
                     <li><a href="{{route('order.detail')}}">My Orders</a></li>
-                    <li><a href="page-account.html">My Wishlist</a></li>
-                    <li><a href="page-account.html">Setting</a></li>
-                    <li><a href="page-login.html">Sign out</a></li>
+                    <li><a href="{{ route('logout') }}">Sign out</a></li>
                   </ul>
                 </div>
               </div><a class="font-lg icon-list icon-wishlist" href="{{route('wishlist')}}"><span>Wishlist</span>

@@ -37,7 +37,7 @@ class PaymentController extends Controller
         $order->save();
         $cart = Cart::where('user_id', Auth::user()->id)->get();
         foreach ($cart as $item) {
-            $order->products()->attach($item->id, [
+            $order->products()->attach($item->product_id, [
                 'quantity' => $item->quantity,
                 'user_id' => Auth::user()->id
             ]);
@@ -54,7 +54,6 @@ class PaymentController extends Controller
     }
     public function payment_success(Request $request)
     {
-        // dd($request->all());
     //    $api_key = 'sk_test_51O6AuDIRfdT0jn8QNNiFYWikU7oUATwdEvvAfJa7zB6dnBogZGO7JOk9h7Z7Q7M03dgMKVsuU5KJ8T9KC2rsk0Xy00CX7Oesnc';
     //    dd($api_key);
         Stripe::setApiKey('sk_test_51O6AuDIRfdT0jn8QNNiFYWikU7oUATwdEvvAfJa7zB6dnBogZGO7JOk9h7Z7Q7M03dgMKVsuU5KJ8T9KC2rsk0Xy00CX7Oesnc');
@@ -69,6 +68,7 @@ class PaymentController extends Controller
         $order_id =$request->order_id;
         $order = Order::find($order_id);
         $order->status = 'paid';
+        $order->order_status = 'delivery_in_progress';
         $order->save();
         if($order)
         {
