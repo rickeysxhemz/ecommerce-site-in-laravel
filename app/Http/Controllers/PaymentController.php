@@ -24,6 +24,7 @@ class PaymentController extends Controller
     public function place_order(Request $request)
     {
         $order = new Order();
+        $order->user_id = Auth::user()->id;
         $orderNumber = 'ORD' . Str::random(8);
         $order->order_no = $orderNumber;
         $order->first_name = $request->first_name;
@@ -36,7 +37,10 @@ class PaymentController extends Controller
         $order->save();
         $cart = Cart::where('user_id', Auth::user()->id)->get();
         foreach ($cart as $item) {
-            $order->products()->attach($item->id, ['quantity' => $item->quantity]);
+            $order->products()->attach($item->id, [
+                'quantity' => $item->quantity,
+                'user_id' => Auth::user()->id
+            ]);
         }
         $order_id = $order->id;
         // session()->forget('cart');
