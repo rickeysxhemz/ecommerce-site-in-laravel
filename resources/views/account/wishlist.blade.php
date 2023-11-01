@@ -40,7 +40,7 @@
                 </div>
                 <div class="wishlist-product">
                   <div class="product-wishlist">
-                    <div class="product-image"><a href="shop-single-product.html"><img src="assets/imgs/page/product/img-sub.png" alt="Ecom"></a></div>
+                    <div class="product-image"><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product->url}}" alt="Ecom"></a></div>
                     <div class="product-info"><a href="shop-single-product.html">
                         <h6 class="color-brand-3"></h6>{{$product->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>

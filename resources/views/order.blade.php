@@ -11,38 +11,13 @@
           <p class="font-md color-gray-500">From your account dashboard. you can easily check & view your recent orders,<br class="d-none d-lg-block">manage your shipping and billing addresses and edit your password and account details.</p>
           <div class="box-tabs mb-100">
             <ul class="nav nav-tabs nav-tabs-account" role="tablist">
-              <li><a class="active" href="#tab-notification" data-bs-toggle="tab" role="tab" aria-controls="tab-notification" aria-selected="true">Notification</a></li>
-              <li><a href="#tab-wishlist" data-bs-toggle="tab" role="tab" aria-controls="tab-wishlist" aria-selected="true">Wishlist</a></li>
+              <li><a class="active" href="#tab-wishlist" data-bs-toggle="tab" role="tab" aria-controls="tab-wishlist" aria-selected="true">Wishlist</a></li>
               <li><a href="#tab-orders" data-bs-toggle="tab" role="tab" aria-controls="tab-orders" aria-selected="true">Orders</a></li>
               <!-- <li><a href="#tab-order-tracking" data-bs-toggle="tab" role="tab" aria-controls="tab-order-tracking" aria-selected="true">Order Tracking</a></li>
               <li><a href="#tab-setting" data-bs-toggle="tab" role="tab" aria-controls="tab-setting" aria-selected="true">Setting</a></li> -->
             </ul>
             <div class="border-bottom mt-20 mb-40"></div>
             <div class="tab-content mt-30">
-              <div class="tab-pane fade active show" id="tab-notification" role="tabpanel" aria-labelledby="tab-notification">
-                <div class="list-notifications">
-                  <div class="item-notification">
-                    <div class="image-notification"><img src="../assets/imgs/page/account/img-1.png" alt="Ecom"></div>
-                    <div class="info-notification">
-                      <h5 class="mb-5">COD payment confirmed</h5>
-                      <p class="font-md color-brand-3">Order<span class="font-md-bold"> 220914QR92BXNH</span> has been confirmed. Please check the estimated delivery time in the order details section!</p>
-                    </div>
-                    <div class="button-notification"><a class="btn btn-buy w-auto">View Details</a></div>
-                  </div>
-                </div>
-                <nav>
-                  <ul class="pagination">
-                    <li class="page-item"><a class="page-link page-prev" href="#"></a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link active" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                    <li class="page-item"><a class="page-link page-next" href="#"></a></li>
-                  </ul>
-                </nav>
-              </div>
               <div class="tab-pane fade" id="tab-wishlist" role="tabpanel" aria-labelledby="tab-wishlist">
                 <div class="box-wishlist">
                   <div class="head-wishlist">
@@ -68,7 +43,7 @@
                         </div>
                         <div class="wishlist-product">
                             <div class="product-wishlist">
-                            <div class="product-image"><a href="shop-single-product.html"><img src="../assets/imgs/page/product/img-sub.png" alt="Ecom"></a></div>
+                            <div class="product-image"><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product->url}}" alt="Ecom"></a></div>
                             <div class="product-info"><a href="shop-single-product.html">
                                 <h6 class="color-brand-3"></h6>{{$product->title}}</a>
                                 <div class="rating"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
@@ -100,12 +75,18 @@
                     <div class="head-left">
                       <h5 class="mr-20">Order ID: #{{$product->order->order_no}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span><span class="label-delivery">Delivery in progress</span>
                     </div>
-                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto">View Order</a></div>
+                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto" href="{{ route('order.single', ['id' => $product->order->id])}}">View Order</a></div>
+                  </div>
+                  <div class="head-orders">
+                    <div class="head-left">
+                      <h5 class="mr-20">Shipment ID: #{{$product->order->shipment_id}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span>
+                    </div>
+                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto" href="{{$product->order->shipment_url}}"  target="_blank">View Shipment</a></div>
                   </div>
                   <div class="body-orders">
                     <div class="list-orders">
                       <div class="item-orders">
-                        <div class="image-orders"><img src="../assets/imgs/page/account/img-1.png" alt="Ecom"></div>
+                        <div class="image-orders"><img src="http://127.0.0.1:8000/{{$product->product->url}}" alt="Ecom"></div>
                         <div class="info-orders">
                           <h5>{{$product->product->title}}</h5>
                         </div>
@@ -133,7 +114,7 @@
                   <div class="body-orders">
                     <div class="list-orders">
                       <div class="item-orders">
-                        <div class="image-orders"><img src="assets/imgs/page/account/img-1.png" alt="Ecom"></div>
+                        <div class="image-orders"><img src="http://127.0.0.1:8000/{{$product->product->url}}" alt="Ecom"></div>
                         <div class="info-orders">
                           <h5>{{$product->product->title}}</h5>
                         </div>
@@ -162,7 +143,7 @@
                   <div class="body-orders">
                     <div class="list-orders">
                       <div class="item-orders">
-                        <div class="image-orders"><img src="assets/imgs/page/product/ss.jpg" alt="Ecom"></div>
+                        <div class="image-orders"><img src="http://127.0.0.1:8000/{{$product->product->url}}" alt="Ecom"></div>
                         <div class="info-orders">
                           <h5>{{$product->product->title}}</h5>
                         </div>

@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="box-border">
-                <div class="box-payment"><a class="btn btn-gpay"><img src="../assets/imgs/page/checkout/gpay.svg" alt="Ecom"></a><a class="btn btn-paypal"><img src="../assets/imgs/page/checkout/paypal.svg" alt="Ecom"></a><a class="btn btn-amazon"><img src="../assets/imgs/page/checkout/amazon.svg" alt="Ecom"></a></div>
+              <div class="box-payment"><a class="btn btn-gpay"><img src="http://127.0.0.1:8000/assets/imgs/page/checkout/stripe.png" alt="Ecom"></a></div>
                 <div class="border-bottom-4 text-center mb-20">
                   <div class="text-or font-md color-gray-500">Or</div>
                 </div>
@@ -85,10 +85,10 @@
                   <div class="item-wishlist">
                     <div class="wishlist-product">
                       <div class="product-wishlist">
-                        <div class="product-image"><a href="shop-single-product.html"><img src="../assets/imgs/page/product/img-sub.png" alt="Ecom"></a></div>
+                        <div class="product-image"><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product['url']}}" alt="Ecom"></a></div>
                         <div class="product-info"><a href="shop-single-product.html">
                             <h6 class="color-brand-3">{{$product['title']}}</h6></a>
-                          <div class="rating"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
+                          <div class="rating"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
                         </div>
                       </div>
                     </div>

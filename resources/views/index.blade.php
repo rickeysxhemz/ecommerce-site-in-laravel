@@ -173,10 +173,10 @@
                 <div class="card-grid-style-3">
                   <div class="card-grid-inner">
                     <div class="tools"><a class="btn btn-trend btn-tooltip mb-10" href="#" aria-label="Trend" data-bs-placement="left"></a><a class="btn btn-wishlist btn-tooltip mb-10" href="{{ route('addWishlist', ['id' => $product['id']]) }}" aria-label="Add To Wishlist"></a><a class="btn btn-compare btn-tooltip mb-10" href="shop-compare.html" aria-label="Compare"></a><a class="btn btn-quickview btn-tooltip" aria-label="Quick view" href="#ModalQuickview" data-bs-toggle="modal"></a></div>
-                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="assets/imgs/page/homepage1/imgsp3.png" alt="Ecom"></a></div>
+                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product->url}}" alt="Ecom"></a></div>
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$product->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
-                      <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">$2856.3</strong><span class="color-gray-500 price-line">$3225.6</span></div>
+                      <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">${{$product->buyBoxPrice}}</strong><span class="color-gray-500 price-line">$3225.6</span></div>
                       @if(auth()->check())
                       <div class="mt-20 box-btn-cart">
                           <form method="POST" action="{{ route('cart.add') }}">
@@ -208,10 +208,10 @@
               <div class="card-grid-style-3">
                   <div class="card-grid-inner">
                     <div class="tools"><a class="btn btn-trend btn-tooltip mb-10" href="#" aria-label="Trend" data-bs-placement="left"></a><a class="btn btn-wishlist btn-tooltip mb-10" href="{{ route('addWishlist', ['id' => $best_seller['id']]) }}" aria-label="Add To Wishlist"></a><a class="btn btn-compare btn-tooltip mb-10" href="shop-compare.html" aria-label="Compare"></a><a class="btn btn-quickview btn-tooltip" aria-label="Quick view" href="#ModalQuickview" data-bs-toggle="modal"></a></div>
-                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="assets/imgs/page/homepage1/imgsp1.png" alt="Ecom"></a></div>
+                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$best_seller->url}}" alt="Ecom"></a></div>
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$best_seller->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
-                      <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">$2325.3</strong><span class="color-gray-500 price-line">$2225.6</span></div>
+                      <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">${{$best_seller->buyBoxPrice}}</strong><span class="color-gray-500 price-line">$2225.6</span></div>
                       @if(auth()->check())
                       <div class="mt-20 box-btn-cart">
                           <form method="POST" action="{{ route('cart.add') }}">
@@ -241,10 +241,10 @@
               <div class="card-grid-style-3">
                   <div class="card-grid-inner">
                     <div class="tools"><a class="btn btn-trend btn-tooltip mb-10" href="#" aria-label="Trend" data-bs-placement="left"></a><a class="btn btn-wishlist btn-tooltip mb-10" href="{{ route('addWishlist', ['id' => $most_viewed['id']]) }}" aria-label="Add To Wishlist"></a><a class="btn btn-compare btn-tooltip mb-10" href="shop-compare.html" aria-label="Compare"></a><a class="btn btn-quickview btn-tooltip" aria-label="Quick view" href="#ModalQuickview" data-bs-toggle="modal"></a></div>
-                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="assets/imgs/page/homepage1/imgsp5.png" alt="Ecom"></a></div>
+                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$most_viewed->url}}" alt="Ecom"></a></div>
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$most_viewed->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
-                      <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">$2325.3</strong><span class="color-gray-500 price-line">$2225.6</span></div>
+                      <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">${{$most_viewed->buyBoxPrice}}</strong><span class="color-gray-500 price-line">$2225.6</span></div>
                       @if(auth()->check())
                       <div class="mt-20 box-btn-cart">
                           <form method="POST" action="{{ route('cart.add') }}">

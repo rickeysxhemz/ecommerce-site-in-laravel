@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
         });
         Route::prefix('order')->group(function () {
             Route::get('detail', [OrderController::class,'orderDetail'])->name('order.detail');
+            Route::get('single/{id}', [OrderController::class,'singleOrder'])->name('order.single');
         });
 
 });
