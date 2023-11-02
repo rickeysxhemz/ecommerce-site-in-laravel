@@ -46,9 +46,9 @@
                     </div>
                     <div class="wishlist-product">
                       <div class="product-wishlist">
-                        <div class="product-image"><a href="shop-single-product.html"><img src="assets/imgs/page/product/img-sub.png" alt="Ecom"></a></div>
-                        <div class="product-info"><a href="shop-single-product.html">
                           @foreach($item->product as $product)
+                          <div class="product-image"><a href="shop-single-product.html"><img src="{{ env('COMMON_PATH')}}/{{$product->url}}" alt="Ecom"></a></div>
+                          <div class="product-info"><a href="shop-single-product.html">
                             <h6 class="color-brand-3">{{$product->title}}</h6></a>
                             @endforeach
                           <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
@@ -78,8 +78,7 @@
 
                 </div>
                 <div class="row mb-40">
-                  <div class="col-lg-6 col-md-6 col-sm-6-col-6"><a class="btn btn-buy w-auto arrow-back mb-10" href="shop-grid.html">Continue shopping</a></div>
-                  <div class="col-lg-6 col-md-6 col-sm-6-col-6 text-md-end"><a class="btn btn-buy w-auto update-cart mb-10" href="{{route('cart')}}" >Update cart</a></div>
+                  <div class="col-lg-6 col-md-6 col-sm-6-col-6"><a class="btn btn-buy w-auto arrow-back mb-10" href="{{route('home')}}">Continue shopping</a></div>
                 </div>
                 <div class="row mb-50">
                   <div class="col-lg-6 col-md-6">

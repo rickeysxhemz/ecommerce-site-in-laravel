@@ -11,8 +11,8 @@
           <p class="font-md color-gray-500">From your account dashboard. you can easily check & view your recent orders,<br class="d-none d-lg-block">manage your shipping and billing addresses and edit your password and account details.</p>
           <div class="box-tabs mb-100">
             <ul class="nav nav-tabs nav-tabs-account" role="tablist">
-              <li><a class="active" href="#tab-wishlist" data-bs-toggle="tab" role="tab" aria-controls="tab-wishlist" aria-selected="true">Wishlist</a></li>
-              <li><a href="#tab-orders" data-bs-toggle="tab" role="tab" aria-controls="tab-orders" aria-selected="true">Orders</a></li>
+                <li><a class="active" href="#tab-orders" data-bs-toggle="tab" role="tab" aria-controls="tab-orders" aria-selected="true">Orders</a></li>
+              <li><a  href="#tab-wishlist" data-bs-toggle="tab" role="tab" aria-controls="tab-wishlist" aria-selected="true">Wishlist</a></li>
               <!-- <li><a href="#tab-order-tracking" data-bs-toggle="tab" role="tab" aria-controls="tab-order-tracking" aria-selected="true">Order Tracking</a></li>
               <li><a href="#tab-setting" data-bs-toggle="tab" role="tab" aria-controls="tab-setting" aria-selected="true">Setting</a></li> -->
             </ul>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="wishlist-product">
                             <div class="product-wishlist">
-                            <div class="product-image"><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product->url}}" alt="Ecom"></a></div>
+                            <div class="product-image"><a href="shop-single-product.html"><img src="{{ env('COMMON_PATH')}}/{{$product->url}}" alt="Ecom"></a></div>
                             <div class="product-info"><a href="shop-single-product.html">
                                 <h6 class="color-brand-3"></h6>{{$product->title}}</a>
                                 <div class="rating"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><img src="../assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
@@ -68,99 +68,50 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders">
+              <div class="tab-pane fade active show" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders">
               @foreach($delivery_in_progress as $product)  
               <div class="box-orders">
-                  <div class="head-orders">
+                  <div class="head-orders" style="border-bottom:none">
                     <div class="head-left">
-                      <h5 class="mr-20">Order ID: #{{$product->order->order_no}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span><span class="label-delivery">Delivery in progress</span>
+                      <h5 class="mr-20">Order ID: #{{$product->order_no}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span>
+                      <?php  if($product->order_status == 'delivery_in_progress'){?>
+                            <span class="label-delivery">Delivery in progress</span>
+                        <?php } elseif ($product->order_status == 'delivered') {?>
+                            <span class="label-delivery label-delivered">Delivered</span>
+                        <?php } elseif ($product->order_status == 'cancel') {?> 
+                            <span class="label-delivery label-cancel">Cancel</span>   
+                        <?php }?>
                     </div>
-                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto" href="{{ route('order.single', ['id' => $product->order->id])}}">View Order</a></div>
+                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto" href="{{ route('order.single', ['id' => $product->id])}}">View Order</a></div>
                   </div>
                   <div class="head-orders">
                     <div class="head-left">
-                      <h5 class="mr-20">Shipment ID: #{{$product->order->shipment_id}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span>
+                      <h5 class="mr-20">Shipment ID: #{{$product->shipment_id}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span>
                     </div>
-                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto" href="{{$product->order->shipment_url}}"  target="_blank">View Shipment</a></div>
+                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto" href="{{$product->shipment_url}}"  target="_blank">View Shipment</a></div>
                   </div>
                   <div class="body-orders">
                     <div class="list-orders">
+                    @foreach($product->orderProducts as $orderProduct)
                       <div class="item-orders">
-                        <div class="image-orders"><img src="http://127.0.0.1:8000/{{$product->product->url}}" alt="Ecom"></div>
+                        <div class="image-orders"><img src="{{ env('COMMON_PATH')}}/{{$orderProduct->url}}" alt="Ecom"></div>
                         <div class="info-orders">
-                          <h5>{{$product->product->title}}</h5>
+                          <h5>{{$orderProduct->title}}</h5>
                         </div>
                         <div class="quantity-orders">
-                          <h5>Quantity: {{$product->quantity}}</h5>
+                          <h5>Quantity: {{$orderProduct->pivot->quantity}}</h5>
                         </div>
                         <div class="price-orders">
-                        <h3>$ <?php $price = $product->quantity *  $product->product->buyBoxPrice;
+                        <h3>$ <?php $price = $orderProduct->pivot->quantity *  $orderProduct->buyBoxPrice;
                                echo $price;
                           ?> </h3>
                         </div>
                       </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>
             @endforeach
-            @foreach($delivered as $product)
-                <div class="box-orders">
-                  <div class="head-orders">
-                    <div class="head-left">
-                      <h5 class="mr-20">Order ID: #{{$product->order->order_no}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span><span class="label-delivery label-delivered">Delivered</span>
-                    </div>
-                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto">View Order</a></div>
-                  </div>
-                  <div class="body-orders">
-                    <div class="list-orders">
-                      <div class="item-orders">
-                        <div class="image-orders"><img src="http://127.0.0.1:8000/{{$product->product->url}}" alt="Ecom"></div>
-                        <div class="info-orders">
-                          <h5>{{$product->product->title}}</h5>
-                        </div>
-                        <div class="quantity-orders">
-                          <h5>Quantity: {{$product->quantity}}</h5>
-                        </div>
-                        <div class="price-orders">
-                          <h3>$ <?php $price = $product->quantity *  $product->product->buyBoxPrice;
-                               echo $price;
-                          ?> </h3>
-                        </div>
-                      </div>
-                     
-                    </div>
-                  </div>
-                </div>
-                @endforeach
-                @foreach($cancel as $product)
-                <div class="box-orders">
-                  <div class="head-orders">
-                    <div class="head-left">
-                      <h5 class="mr-20">Order ID: #{{$product->order->order_no}}</h5><span class="font-md color-brand-3 mr-20">Date: 18 September 2022</span><span class="label-delivery label-cancel">Cancel</span>
-                    </div>
-                    <div class="head-right"><a class="btn btn-buy font-sm-bold w-auto">View Order</a></div>
-                  </div>
-                  <div class="body-orders">
-                    <div class="list-orders">
-                      <div class="item-orders">
-                        <div class="image-orders"><img src="http://127.0.0.1:8000/{{$product->product->url}}" alt="Ecom"></div>
-                        <div class="info-orders">
-                          <h5>{{$product->product->title}}</h5>
-                        </div>
-                        <div class="quantity-orders">
-                          <h5>Quantity: {{$product->quantity}}</h5>
-                        </div>
-                        <div class="price-orders">
-                        <h3>$ <?php $price = $product->quantity *  $product->product->buyBoxPrice;
-                               echo $price;
-                          ?> </h3>
-                        </div>
-                      </div>
-                     
-                    </div>
-                  </div>
-                </div>
-                @endforeach
                 <nav>
                   <ul class="pagination">
                     <li class="page-item"><a class="page-link page-prev" href="#"></a></li>

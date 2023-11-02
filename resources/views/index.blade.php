@@ -108,7 +108,7 @@
               @foreach ($featured_categories as $category)
               <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card-grid-style-2 card-grid-style-2-small hover-up">
-                  <div class="image-box"><a href="{{route('shop')}}"><img src="http://127.0.0.1:8000/{{$category->image}}" alt="Ecom"></a></div>
+                  <div class="image-box"><a href="{{route('shop')}}"><img src="{{ env('COMMON_PATH')}}/{{$category->image}}" alt="Ecom"></a></div>
                   <div class="info-right"><a class="color-brand-3 font-sm-bold" href="{{route('shop')}}">
                       <h6>{{$category->name}}</h6></a>
 
@@ -170,21 +170,21 @@
             <div class="tab-pane fade active show" id="tab-all" role="tabpanel" aria-labelledby="tab-all">
               <div class="list-products-5">
                 @foreach($all_products as $product)
-                <div class="card-grid-style-3">
+                <div class="card-grid-style-3 product_id" data-id="{{ $product->id }}">
                   <div class="card-grid-inner">
                     <div class="tools"><a class="btn btn-trend btn-tooltip mb-10" href="#" aria-label="Trend" data-bs-placement="left"></a><a class="btn btn-wishlist btn-tooltip mb-10" href="{{ route('addWishlist', ['id' => $product['id']]) }}" aria-label="Add To Wishlist"></a><a class="btn btn-compare btn-tooltip mb-10" href="shop-compare.html" aria-label="Compare"></a><a class="btn btn-quickview btn-tooltip" aria-label="Quick view" href="#ModalQuickview" data-bs-toggle="modal"></a></div>
-                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product->url}}" alt="Ecom"></a></div>
+                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="{{ env('COMMON_PATH')}}/{{$product->url}}" alt="Ecom"></a></div>
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$product->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
                       <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">${{$product->buyBoxPrice}}</strong><span class="color-gray-500 price-line">$3225.6</span></div>
                       @if(auth()->check())
                       <div class="mt-20 box-btn-cart">
-                          <form method="POST" action="{{ route('cart.add') }}">
-                              @csrf
+                          <!-- <form method="POST" action="{{ route('cart.add') }}">
+                              @csrf -->
                               <input type="hidden" name="id" value="{{ $product->id }}">
-                              <input type="hidden" name="price" value="{{ $product->buyBoxPrice}}">
-                              <button type="submit" class="btn btn-cart">Add To Cart</button>
-                          </form>
+                              <input class="price" type="hidden" name="price" value="{{ $product->buyBoxPrice}}">
+                              <button type="submit" class="btn btn-cart add-to-cart">Add To Cart</button>
+                          <!-- </form> -->
                       </div>
                       @else
                       <div class="mt-20 box-btn-cart"><a class="btn btn-cart" href="{{route('login')}}">Add To Cart</a></div>
@@ -208,7 +208,7 @@
               <div class="card-grid-style-3">
                   <div class="card-grid-inner">
                     <div class="tools"><a class="btn btn-trend btn-tooltip mb-10" href="#" aria-label="Trend" data-bs-placement="left"></a><a class="btn btn-wishlist btn-tooltip mb-10" href="{{ route('addWishlist', ['id' => $best_seller['id']]) }}" aria-label="Add To Wishlist"></a><a class="btn btn-compare btn-tooltip mb-10" href="shop-compare.html" aria-label="Compare"></a><a class="btn btn-quickview btn-tooltip" aria-label="Quick view" href="#ModalQuickview" data-bs-toggle="modal"></a></div>
-                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$best_seller->url}}" alt="Ecom"></a></div>
+                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="{{ env('COMMON_PATH')}}/{{$best_seller->url}}" alt="Ecom"></a></div>
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$best_seller->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
                       <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">${{$best_seller->buyBoxPrice}}</strong><span class="color-gray-500 price-line">$2225.6</span></div>
@@ -241,7 +241,7 @@
               <div class="card-grid-style-3">
                   <div class="card-grid-inner">
                     <div class="tools"><a class="btn btn-trend btn-tooltip mb-10" href="#" aria-label="Trend" data-bs-placement="left"></a><a class="btn btn-wishlist btn-tooltip mb-10" href="{{ route('addWishlist', ['id' => $most_viewed['id']]) }}" aria-label="Add To Wishlist"></a><a class="btn btn-compare btn-tooltip mb-10" href="shop-compare.html" aria-label="Compare"></a><a class="btn btn-quickview btn-tooltip" aria-label="Quick view" href="#ModalQuickview" data-bs-toggle="modal"></a></div>
-                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$most_viewed->url}}" alt="Ecom"></a></div>
+                    <div class="image-box"><span class="label bg-brand-2">-17%</span><a href="shop-single-product.html"><img src="{{ env('COMMON_PATH')}}/{{$most_viewed->url}}" alt="Ecom"></a></div>
                     <div class="info-right"><a class="font-xs color-gray-500" href="shop-vendor-single.html">Apple</a><br><a class="color-brand-3 font-sm-bold" href="shop-single-product.html">{{$most_viewed->title}}</a>
                       <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500">(65)</span></div>
                       <div class="price-info"><strong class="font-lg-bold color-brand-3 price-main">${{$most_viewed->buyBoxPrice}}</strong><span class="color-gray-500 price-line">$2225.6</span></div>
@@ -1432,5 +1432,41 @@
             toastr.error("{{ Session::get('error') }}");
         @endif
     </script>
+    <script>
+$(document).ready(function() {
+    // Listen for clicks on the "plus" button
+    $('.add-to-cart').click(function(e) {
+      e.preventDefault();
+      var ele = $(this);
+      // var product_id = $('.product_id').val();
+      // var price = $('.price').val();
+        // updateQuantity(this, 1);
+
+        var csrf="{{csrf_token()}}";
+
+        $.ajax({
+          type: 'POST',
+          url: '{{ route("cart.add") }}',
+          data: {
+            _token:csrf,
+            id: ele.parents(".product_id").attr("data-id"), 
+            price: ele.parents(".product_id").find(".price").val()
+            // id: product_id,
+            // price: price
+          },
+          success: function(response) {
+            console.log(response.cart_count);
+            $('.cart-count').html(response.cart_count);
+            $('.add-cart').append('<div class="item-cart mb-20"><div class="cart-image"><img src="{{ env('COMMON_PATH')}}/'+ response.cart[0].product[0].url +'" alt="Ecom"></div><div class="cart-info"><a class="font-sm-bold color-brand-3" href="shop-single-product.html">'+ response.cart[0].product[0].title +'</a><p><span class="color-brand-2 font-sm-bold">'+ response.cart[0].quantity +' x $'+ response.cart[0].price +'</span></p></div></div>');
+            $('.total_amount').html(response.total_amount);
+
+          }
+        });
+    });
+
+    //csrf token
+    
+});
+</script>
   </body>
 </html>

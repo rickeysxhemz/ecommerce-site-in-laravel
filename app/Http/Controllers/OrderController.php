@@ -17,32 +17,16 @@ class OrderController extends Controller
         $cart = Cart::with('product')
         ->where('user_id',Auth::user()->id)->get();
         $favourite_products=FavouriteProduct::with('products')->where('user_id',Auth::user()->id)->get();
-        $delivery_in_progress = OrderProduct::with(['product:id,title,buyBoxPrice,url', 'order:id,order_no,order_status,shipment_id,shipment_url'])
-        ->whereHas('order', function ($query) {
-            $query->where('order_status', 'delivery_in_progress');
-        })
+        $delivery_in_progress = Order::with(['orderProducts'])
+        ->whereIn('order_status', ['delivery_in_progress', 'delivered', 'cancel'])
         ->where('user_id', Auth::user()->id)
-        ->get();
-        $delivered = OrderProduct::with(['product:id,title,buyBoxPrice,url', 'order:id,order_no,order_status'])
-        ->whereHas('order', function ($query) {
-            $query->where('order_status', 'delivered');
-        })
-        ->where('user_id', Auth::user()->id)
-        ->get();
-        $cancel = OrderProduct::with(['product:id,title,buyBoxPrice,url', 'order:id,order_no,order_status'])
-        ->whereHas('order', function ($query) {
-            $query->where('order_status', 'cancel');
-        })
-        ->where('user_id', Auth::user()->id)
+        ->orderBy('id', 'desc')
         ->get();
         
-
-        return view('order', compact('cart', 'favourite_products','delivery_in_progress','delivered','cancel'));
+        return view('order', compact('cart', 'favourite_products','delivery_in_progress'));
     }
     function singleOrder($order_id) {
-        $order_detail = Order::with([
-            'products:id,title,buyBoxPrice,url'
-        ])->where('status', 'paid')->where('id', $order_id)->get();
+        $order_detail = Order::with(['orderProducts'])->where('status', 'paid')->where('id', $order_id)->get();
         $products = $order_detail[0]['products']; 
         $cart = [];
         return view('payment.order', compact('cart', 'order_detail', 'products'))->with('message', 'order get successful');

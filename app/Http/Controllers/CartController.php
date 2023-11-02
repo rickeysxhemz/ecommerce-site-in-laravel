@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Response;
 
 class CartController extends Controller
 {
@@ -23,7 +24,25 @@ class CartController extends Controller
             $cart=Cart::where('product_id',$request->id)->where('user_id',Auth::user()->id)->first();
             $cart->quantity=$cart->quantity+1;
             $cart->save();
-            return redirect()->back()->with('message', 'Product quantity updated');
+            $cart_add = Cart::with('product:id,url,title')
+            ->where('user_id',Auth::user()->id)->where('id',$cart->id)->get();
+            $cart_count=Cart::where('user_id',Auth::user()->id)->count();
+
+            $carts = Cart::with('product:id,url,title')
+            ->where('user_id',Auth::user()->id)->get();
+
+            $total_amount = 0;
+            foreach($carts as $add_to_cart){
+                $single_amount = $add_to_cart->price * $add_to_cart->quantity;
+                $total_amount = $total_amount + $single_amount; 
+            }
+            $cart_array = [
+                'cart' => $cart_add,
+                'cart_count' => $cart_count,
+                'total_amount' => $total_amount
+            ];
+            return Response::json($cart_array);
+            // return redirect()->back()->with('message', 'Product quantity updated');
         }else
         {
         $cart =new Cart();
@@ -31,8 +50,28 @@ class CartController extends Controller
         $cart->user_id = Auth::user()->id;
         $cart->quantity = 1;
         $cart->price=$request->price;
-        $cart->save();            
-        return redirect()->back()->with('message','Product added to cart successfully!');
+        $cart->save();  
+        
+        $cart_add = Cart::with('product:id,url,title')
+        ->where('user_id',Auth::user()->id)->where('id',$cart->id)->get(); 
+        $cart_count=Cart::where('user_id',Auth::user()->id)->count();
+       
+        $carts = Cart::with('product:id,url,title')
+        ->where('user_id',Auth::user()->id)->get();
+
+        $total_amount = 0;
+        foreach($carts as $add_to_cart){
+            $single_amount = $add_to_cart->price * $add_to_cart->quantity;
+            $total_amount = $total_amount + $single_amount; 
+        }
+
+        $cart_array = [
+            'cart' => $cart_add,
+            'cart_count' => $cart_count,
+            'total_amount' => $total_amount 
+        ];
+        return Response::json($cart_array);      
+        // return redirect()->back()->with('message','Product added to cart successfully!');
         }
     }
     public function update_cart(Request $request)

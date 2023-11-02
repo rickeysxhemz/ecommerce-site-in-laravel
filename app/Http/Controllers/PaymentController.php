@@ -204,8 +204,9 @@ class PaymentController extends Controller
             'products:id,title,buyBoxPrice,url'
         ])->where('status', 'paid')->where('id', $order_id)->get();
         $products = $order_detail[0]['products']; 
+        $success = 'Payment submit successfully and order created';
         $cart = [];
-        return view('payment.order', compact('cart', 'order_detail', 'products'))->with('message', 'Payment was successful');
+        return view('payment.order', compact('cart', 'order_detail', 'products', 'success'))->with('message', 'Payment was successful');
 
     }
 }

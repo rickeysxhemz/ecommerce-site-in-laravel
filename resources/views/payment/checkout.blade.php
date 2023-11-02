@@ -124,7 +124,7 @@
                     <div class="wishlist-product">
                       <div class="product-wishlist">
                         @foreach($item->product as $product)    
-                        <div class="product-image"><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product->url}}" alt="Ecom"></a></div>
+                        <div class="product-image"><a href="shop-single-product.html"><img src="{{ env('COMMON_PATH')}}/{{$product->url}}" alt="Ecom"></a></div>
                         <div class="product-info"><a href="shop-single-product.html">
                         <h6 class="color-brand-3">{{$product->title}}</h6></a>
                         @endforeach

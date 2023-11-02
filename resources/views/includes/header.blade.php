@@ -115,7 +115,7 @@
                   <span class="number-item font-xs">{{ session('favourite_count') }}</span>
               @endif
             </a>
-              <div class="d-inline-block box-dropdown-cart"><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">
+              <div class="d-inline-block box-dropdown-cart "><span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs cart-count">
               @php
                 $i=0;
               @endphp
@@ -139,21 +139,22 @@
                             @endphp
 
                             <div class="item-cart mb-20">
-                                <div class="cart-image"><img src="{{ asset('assets/imgs/page/homepage1/imgsp5.png') }}" alt="Ecom"></div>
-                                <div class="cart-info">
                                   @foreach($item->product as $product)
+                                  <div class="cart-image"><img src="{{ env('COMMON_PATH')}}/{{$product->url}}" alt="Ecom"></div>
+                                   <div class="cart-info">
                                     <a class="font-sm-bold color-brand-3" href="shop-single-product.html">{{ $product->title }}</a>
                                   @endforeach
                                     <p><span class="color-brand-2 font-sm-bold">{{ $item->quantity }} x ${{ $item->price }}</span></p>
                                 </div>
                             </div>
                         @endforeach
+                        <div class="add-cart"></div>
 
                         <div class="border-bottom pt-0 mb-15"></div>
                         <div class="cart-total">
                             <div class="row">
                                 <div class="col-6 text-start"><span class="font-md-bold color-brand-3">Total</span></div>
-                                <div class="col-6"><span class="font-md-bold color-brand-1">${{ number_format($total, 2) }}</span></div>
+                                <div class="col-6"><span class="font-md-bold color-brand-1 total_amount">${{ number_format($total, 2) }}</span></div>
                             </div>
                             <div class="row mt-15">
                                 <div class="col-6 text-start"><a class="btn btn-cart w-auto" href="{{route('cart')}}">View cart</a></div>

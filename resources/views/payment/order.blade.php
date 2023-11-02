@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="box-border">
-              <div class="box-payment"><a class="btn btn-gpay"><img src="http://127.0.0.1:8000/assets/imgs/page/checkout/stripe.png" alt="Ecom"></a></div>
+              <div class="box-payment"><a class="btn btn-gpay"><img src="{{ env('COMMON_PATH')}}/assets/imgs/page/checkout/stripe.png" alt="Ecom"></a></div>
                 <div class="border-bottom-4 text-center mb-20">
                   <div class="text-or font-md color-gray-500">Or</div>
                 </div>
@@ -85,22 +85,23 @@
                   <div class="item-wishlist">
                     <div class="wishlist-product">
                       <div class="product-wishlist">
-                        <div class="product-image"><a href="shop-single-product.html"><img src="http://127.0.0.1:8000/{{$product['url']}}" alt="Ecom"></a></div>
+                        <div class="product-image"><a href="shop-single-product.html"><img src="{{ env('COMMON_PATH')}}/{{$product['url']}}" alt="Ecom"></a></div>
                         <div class="product-info"><a href="shop-single-product.html">
                             <h6 class="color-brand-3">{{$product['title']}}</h6></a>
-                          <div class="rating"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="http://127.0.0.1:8000/assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
+                          <div class="rating"><img src="{{ env('COMMON_PATH')}}/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="{{ env('COMMON_PATH')}}/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="{{ env('COMMON_PATH')}}/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="{{ env('COMMON_PATH')}}/assets/imgs/template/icons/star.svg" alt="Ecom"><img src="{{ env('COMMON_PATH')}}/assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
                         </div>
                       </div>
                     </div>
                     <div class="wishlist-status">
-                      <h5 class="color-gray-500">x1</h5>
+                      <h5 class="color-gray-500">x{{$product->pivot->quantity}}</h5>
                     </div>
                     <div class="wishlist-price">
-                      <h4 class="color-brand-3 font-lg-bold">${{$product['buyBoxPrice']}}</h4>
+                      <h4 class="color-brand-3 font-lg-bold">${{$product->pivot->quantity * $product['buyBoxPrice']}}</h4>
                     </div>
                   </div>
                   @php
-                   $total = $total + $product['buyBoxPrice'];
+                  $amount = $product->pivot->quantity * $product['buyBoxPrice'];
+                   $total = $total + $amount;
                   @endphp
                 @endforeach
                 </div>
@@ -423,5 +424,29 @@ $(document).ready(function() {
   });
 });
 </script>
+<script>
+        // Toastr options
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "rtl": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "500",
+            "hideDuration": "500",
+            "timeOut": "2000",
+            "extendedTimeOut": "500",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+        };
+        @if(isset($success))
+            toastr.success("{{$success}}");
+        @endif    
+    </script>
   </body>
 </html>
